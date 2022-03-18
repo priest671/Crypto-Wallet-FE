@@ -1,14 +1,3 @@
-import {
-  IonApp,
-  IonRouterOutlet,
-  IonSplitPane,
-  setupIonicReact,
-} from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
-import { Redirect, Route } from "react-router-dom";
-import Menu from "./components/Menu";
-import Page from "./pages/Page";
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -27,7 +16,32 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import { useState } from "react";
+
+//Ionic Imports
+import { IonApp, setupIonicReact } from "@ionic/react";
+
+//React Imports
+import "./theme/variables.css";
+import { Fragment, useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+//Pages Imports
+import Menu from "./components/UI/Menu/Menu";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Home from "./pages/Home/Home";
+import Loader from "./components/UI/Loader/Loader";
+import UserHome from "./pages/UserHome/UserHome";
+import Marketplace from "./pages/Marketplace/Marketplace";
+import Wallet from "./pages/Wallet/Wallet";
+import Transactions from "./pages/Transactions/Transactions";
+import UserSetting from "./pages/UserSetting/UserSetting";
+import Trades from "./pages/Trades/Trades";
 
 setupIonicReact();
 
@@ -36,19 +50,38 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          {isAuth && <Menu />}
-          <IonRouterOutlet id="main">
-            <Route path="/" exact={true}>
-              <Redirect to="/page/Inbox" />
-            </Route>
-            <Route path="/page/:name" exact={true}>
-              <Page />
-            </Route>
-          </IonRouterOutlet>
-        </IonSplitPane>
-      </IonReactRouter>
+      <Router>
+        {isAuth && <Menu />}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Fragment>
+                {isAuth === null && <Loader />}
+                {isAuth === true && <UserHome />}
+                {!isAuth && isAuth !== null && <Home />}
+              </Fragment>
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <Fragment>
+                {isAuth && <Navigate to="/" />}
+                {!isAuth && <Login />}
+              </Fragment>
+            }
+          />
+          <Route path="/register" element={<Register />} />
+
+          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/trades" element={<Trades />} />
+          <Route path="/usersetting" element={<UserSetting />} />
+        </Routes>
+      </Router>
     </IonApp>
   );
 };
