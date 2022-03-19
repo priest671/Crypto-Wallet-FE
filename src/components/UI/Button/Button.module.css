@@ -4,8 +4,6 @@
   justify-content: center !important;
   border-radius: 4px !important;
   padding: 15px 10px !important;
-  background-color: black !important;
-  color: white !important;
   height: 45px;
   width: 100%;
   font-weight: 600;
@@ -14,22 +12,23 @@
   letter-spacing: 1px;
 }
 
-.button *{
+.button * {
   font-size: inherit;
 }
 
 .primary {
   background-color: var(--primary) !important;
+  color: var(--primaryText) !important;
 }
 
-.small{
+.small {
   font-size: 10px !important;
   height: 34px !important;
 }
 
 .primary-invert {
-  background-color: white !important;
-  color: var(--primary) !important;
+  background-color: transparent !important;
+  color: var(--secondaryText) !important;
   border: 2px solid var(--primary) !important;
 }
 
@@ -40,7 +39,7 @@
 
 .delete {
   background-color: var(--negativeCTA) !important;
-  color: white !important;
+  color: var(--secondary) !important;
 }
 
 .negative-outline {
@@ -54,12 +53,12 @@
   color: white !important;
   width: 34px;
 }
-.delete-icon svg{
+.delete-icon svg {
   font-size: 1.2rem;
 }
 
 /* RESET */
-.reset{
+.reset {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
@@ -74,4 +73,3 @@
   text-transform: none;
   letter-spacing: 0;
 }
-

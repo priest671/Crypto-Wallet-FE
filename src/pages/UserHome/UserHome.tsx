@@ -8,7 +8,7 @@ const UserHome = () => {
   return (
     <IonPage id="main">
       <IonContent>
-        <Header title="User Logged in" />
+        <Header title="Home" />
         <div className="container">
           <h1>User Home</h1>
         </div>

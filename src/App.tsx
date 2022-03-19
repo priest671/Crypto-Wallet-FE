@@ -42,11 +42,12 @@ import Wallet from "./pages/Wallet/Wallet";
 import Transactions from "./pages/Transactions/Transactions";
 import UserSetting from "./pages/UserSetting/UserSetting";
 import Trades from "./pages/Trades/Trades";
+import Transfer from "./pages/Transfer/Transfer";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <IonApp>
@@ -80,6 +81,7 @@ const App: React.FC = () => {
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/trades" element={<Trades />} />
           <Route path="/usersetting" element={<UserSetting />} />
+          <Route path="/transfer" element={<Transfer />} />
         </Routes>
       </Router>
     </IonApp>

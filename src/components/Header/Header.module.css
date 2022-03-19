@@ -1,10 +1,12 @@
 .container {
   background-color: var(--primary);
+  color: var(--primaryText);
   margin: 0;
   padding: 0;
   display: flex;
-  /* gap: 30%; */
-  /* justify-content: space-between; */
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .heading {
@@ -13,4 +15,21 @@
   display: flex;
   margin-right: 45px;
   justify-content: center;
+}
+
+.heading h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.backButton svg {
+  color: var(--primaryText);
+  width: 25px;
+  height: 25px;
 }

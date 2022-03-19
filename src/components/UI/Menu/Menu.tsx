@@ -10,6 +10,8 @@ import { SiBitcoincash } from "react-icons/si";
 import { IoIosWallet } from "react-icons/io";
 import { AiOutlineTransaction, AiTwotoneSetting } from "react-icons/ai";
 import { GiTrade, GiBuyCard } from "react-icons/gi";
+import { BiTransfer } from "react-icons/bi";
+import Button from "../Button/Button";
 
 const Menu: React.FC = () => {
   const [disabled, setDisabled] = React.useState(false);
@@ -29,8 +31,7 @@ const Menu: React.FC = () => {
               <div>
                 <Fragment>
                   {" "}
-                  <SiBitcoincash />
-                  <p>PKR: {balance}</p>{" "}
+                  <p>PKR: {balance}</p> <SiBitcoincash />
                 </Fragment>
               </div>
             </div>
@@ -40,7 +41,7 @@ const Menu: React.FC = () => {
             <div
               onClick={() => {
                 setDisabled(true);
-                setTimeout(() => setDisabled(false), 50);
+                setTimeout(() => setDisabled(false), 100);
               }}
               className={styles["item"]}
             >
@@ -50,7 +51,7 @@ const Menu: React.FC = () => {
             <div
               onClick={() => {
                 setDisabled(true);
-                setTimeout(() => setDisabled(false), 50);
+                setTimeout(() => setDisabled(false), 100);
               }}
               className={styles["item"]}
             >
@@ -60,14 +61,14 @@ const Menu: React.FC = () => {
             <div
               onClick={() => {
                 setDisabled(true);
-                setTimeout(() => setDisabled(false), 50);
+                setTimeout(() => setDisabled(false), 100);
               }}
               className={styles["item"]}
             >
               <Anchor
                 onClick={() => {
                   setDisabled(true);
-                  setTimeout(() => setDisabled(false), 50);
+                  setTimeout(() => setDisabled(false), 100);
                 }}
                 path="/marketplace"
               >
@@ -78,7 +79,7 @@ const Menu: React.FC = () => {
             <div
               onClick={() => {
                 setDisabled(true);
-                setTimeout(() => setDisabled(false), 50);
+                setTimeout(() => setDisabled(false), 100);
               }}
               className={styles["item"]}
             >
@@ -88,7 +89,18 @@ const Menu: React.FC = () => {
             <div
               onClick={() => {
                 setDisabled(true);
-                setTimeout(() => setDisabled(false), 50);
+                setTimeout(() => setDisabled(false), 100);
+              }}
+              className={styles["item"]}
+            >
+              <Anchor path="/transfer">Transfer Crypto</Anchor>
+              <BiTransfer />
+            </div>
+
+            <div
+              onClick={() => {
+                setDisabled(true);
+                setTimeout(() => setDisabled(false), 100);
               }}
               className={styles["item"]}
             >
@@ -98,11 +110,13 @@ const Menu: React.FC = () => {
           </div>
 
           <div className={styles["footer"]}>
-            <Anchor path="/register">
-              <div className={styles["Button"]}>
-                <p>Logout</p>
-              </div>
-            </Anchor>
+            <div className={styles["footerContainer"]}>
+              <Anchor path="/register">
+                <Button className="delete">
+                  <p>Logout</p>
+                </Button>
+              </Anchor>
+            </div>
           </div>
         </IonContent>
       </IonMenu>
