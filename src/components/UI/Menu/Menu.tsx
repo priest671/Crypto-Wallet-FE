@@ -104,7 +104,7 @@ const Menu: React.FC = () => {
               }}
               className={styles["item"]}
             >
-              <Anchor path="/usersetting">Setting</Anchor>
+              <Anchor path="/usersetting">Settings</Anchor>
               <AiTwotoneSetting />
             </div>
           </div>

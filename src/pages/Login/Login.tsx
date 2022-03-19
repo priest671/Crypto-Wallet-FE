@@ -20,7 +20,7 @@ const Login = () => {
         <div className={styles["container"]}>
           <div className={styles["header"]}>
             <h3>Login Your Account</h3>
-            <p>using your phone number</p>
+            <p>Login using your phone number</p>
           </div>
 
           <form onSubmit={formSubmitHandler}>
@@ -31,13 +31,10 @@ const Login = () => {
                   type="number"
                   value={phone}
                   onIonChange={(e) => setPhone(e.detail.value!)}
-                  error-message="Phone number is required"
-                  // error={true}
-                  maxlength={12}
-                  size={50}
                 ></IonInput>
               </IonItem>
             </div>
+
             <div className={styles["item"]}>
               <IonItem>
                 <IonLabel position="floating">Password</IonLabel>
@@ -48,6 +45,7 @@ const Login = () => {
                 ></IonInput>
               </IonItem>
             </div>
+
             <div className={styles["footer"]}>
               <Button className="primary">Login</Button>
             </div>
