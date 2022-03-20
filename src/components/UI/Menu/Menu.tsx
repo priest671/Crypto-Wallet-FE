@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { IonMenu, IonContent } from "@ionic/react";
 
 import styles from "./Menu.module.css";
-import profile from "./avatar.png";
 import Anchor from "../Anchor/Anchor";
 
 //Icons
@@ -24,7 +23,7 @@ const Menu: React.FC = () => {
         <IonContent>
           <div className={styles["header"]}>
             <div className={styles["pic"]}>
-              <img src={profile} alt="" />
+              <img src="images/HibaAvatar.png" alt="" />
             </div>
             <div className={styles["info"]}>
               <h3>{name}</h3>

@@ -18,7 +18,7 @@ const Home = () => {
           <p>
             Buy and Sell cryptocurrency with ease.
             <br />
-            Check out our market place to buy and sell crypto.
+            Check out our marketplace to buy and sell crypto.
           </p>
           <p>Register now to get your very own wallet.</p>
         </div>

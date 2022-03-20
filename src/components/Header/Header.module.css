@@ -1,12 +1,13 @@
 .container {
   background-color: var(--primary);
-  color: var(--primaryText);
+  color: var(--secondary);
   margin: 0;
   padding: 0;
   display: flex;
-  border-radius: 6px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .heading {
@@ -18,7 +19,7 @@
 }
 
 .heading h3 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -29,7 +30,7 @@
 }
 
 .backButton svg {
-  color: var(--primaryText);
+  color: var(--secondary);
   width: 25px;
   height: 25px;
 }

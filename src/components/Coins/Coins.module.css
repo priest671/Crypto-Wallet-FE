@@ -1,0 +1,32 @@
+.gridHeader {
+  /* background-color: var(--primary); */
+  height: 60px;
+  width: 100%;
+  display: flex;
+  border: 1px solid white;
+}
+
+.left {
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+.left h3 {
+  margin-left: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.right {
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.right h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
