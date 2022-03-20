@@ -1,10 +1,7 @@
 import React from "react";
 import Coin from "./Coin/Coin";
 import styles from "./Coins.module.css";
-
-function hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
-  return key in obj;
-}
+import { hasKey } from "../../helper/HelperFunctions";
 
 interface coinsProps {
   allCoins: { [key: string]: string };

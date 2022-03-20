@@ -1,21 +1,46 @@
-import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
+import {
+  IonContent,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonSelect,
+  IonSelectOption,
+} from "@ionic/react";
 import React from "react";
 import Header from "../../components/Header/Header";
 import styles from "./Trades.module.css";
 import Button from "../../components/UI/Button/Button";
+import { hasKey } from "../../helper/HelperFunctions";
+
+let allCoins = {
+  BTC: "Bitcoin",
+  ETH: "Ethereum",
+  ETH2: "Ethereum 2",
+  DOGE: "Dogecoin",
+  ADA: "Cardano",
+  SOL: "Solana",
+  USDT: "Tether",
+  LTC: "Litecoin",
+  SHIB: "SHIBA INU",
+  ATOM: "Cosmos",
+};
 
 const Trades = () => {
-  const [currency, setCurrency] = React.useState<string>();
-  const [amount, setAmount] = React.useState<string>();
+  const [buyCurrency, setBuyCurrency] = React.useState<string>();
+  const [buyAmount, setBuyAmount] = React.useState<string>();
+
+  const [sellCurrency, setSellCurrency] = React.useState<string>();
+  const [sellAmount, setSellAmount] = React.useState<string>();
 
   const buyFormSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(amount, currency);
+    console.log(buyCurrency, buyAmount);
   };
 
   const sellFormSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(currency, amount);
+    console.log(sellCurrency, sellAmount);
   };
 
   return (
@@ -31,11 +56,30 @@ const Trades = () => {
           <form onSubmit={buyFormSubmitHandler}>
             <div className={styles["item"]}>
               <IonItem>
-                <IonLabel position="floating">Amount</IonLabel>
+                <IonLabel>Currency</IonLabel>
+                <IonSelect
+                  value={buyCurrency}
+                  placeholder="Select Currency"
+                  onIonChange={(e) => setBuyCurrency(e.detail.value)}
+                >
+                  {Object.keys(allCoins).map((key, index) => {
+                    return (
+                      <IonSelectOption key={index} value={key}>
+                        {hasKey(allCoins, key) && allCoins[key]}
+                      </IonSelectOption>
+                    );
+                  })}
+                </IonSelect>
+              </IonItem>
+            </div>
+
+            <div className={styles["item"]}>
+              <IonItem>
+                <IonLabel position="floating">Buy Amount</IonLabel>
                 <IonInput
                   type="number"
-                  value={amount}
-                  onIonChange={(e) => setAmount(e.detail.value!)}
+                  value={buyAmount}
+                  onIonChange={(e) => setBuyAmount(e.detail.value!)}
                 ></IonInput>
               </IonItem>
             </div>
@@ -53,11 +97,30 @@ const Trades = () => {
           <form onSubmit={sellFormSubmitHandler}>
             <div className={styles["item"]}>
               <IonItem>
-                <IonLabel position="floating">Amount</IonLabel>
+                <IonLabel>Currency</IonLabel>
+                <IonSelect
+                  value={sellCurrency}
+                  placeholder="Select Currency"
+                  onIonChange={(e) => setSellCurrency(e.detail.value)}
+                >
+                  {Object.keys(allCoins).map((key, index) => {
+                    return (
+                      <IonSelectOption key={index} value={key}>
+                        {hasKey(allCoins, key) && allCoins[key]}
+                      </IonSelectOption>
+                    );
+                  })}
+                </IonSelect>
+              </IonItem>
+            </div>
+
+            <div className={styles["item"]}>
+              <IonItem>
+                <IonLabel position="floating">Sell Amount</IonLabel>
                 <IonInput
                   type="number"
-                  value={amount}
-                  onIonChange={(e) => setAmount(e.detail.value!)}
+                  value={sellAmount}
+                  onIonChange={(e) => setSellAmount(e.detail.value!)}
                 ></IonInput>
               </IonItem>
             </div>
