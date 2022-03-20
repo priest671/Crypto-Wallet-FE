@@ -75,7 +75,7 @@ const Trades = () => {
 
             <div className={styles["item"]}>
               <IonItem>
-                <IonLabel position="floating">Buy Amount</IonLabel>
+                <IonLabel position="floating">Buy Amount (PKR)</IonLabel>
                 <IonInput
                   type="number"
                   value={buyAmount}
@@ -116,7 +116,7 @@ const Trades = () => {
 
             <div className={styles["item"]}>
               <IonItem>
-                <IonLabel position="floating">Sell Amount</IonLabel>
+                <IonLabel position="floating">Sell Amount (PKR)</IonLabel>
                 <IonInput
                   type="number"
                   value={sellAmount}

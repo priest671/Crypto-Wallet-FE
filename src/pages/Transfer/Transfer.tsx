@@ -1,8 +1,30 @@
-import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
+import {
+  IonContent,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonSelect,
+  IonSelectOption,
+} from "@ionic/react";
 import React from "react";
 import Header from "../../components/Header/Header";
 import styles from "./Transfer.module.css";
 import Button from "../../components/UI/Button/Button";
+import { hasKey } from "../../helper/HelperFunctions";
+
+let allCoins = {
+  BTC: "Bitcoin",
+  ETH: "Ethereum",
+  ETH2: "Ethereum 2",
+  DOGE: "Dogecoin",
+  ADA: "Cardano",
+  SOL: "Solana",
+  USDT: "Tether",
+  LTC: "Litecoin",
+  SHIB: "SHIBA INU",
+  ATOM: "Cosmos",
+};
 
 const Transfer = () => {
   const [walletAddress, setWalletAddress] = React.useState<string>();
@@ -38,7 +60,26 @@ const Transfer = () => {
 
             <div className={styles["item"]}>
               <IonItem>
-                <IonLabel position="floating">Amount</IonLabel>
+                <IonLabel>Currency</IonLabel>
+                <IonSelect
+                  value={currency}
+                  placeholder="Select Currency"
+                  onIonChange={(e) => setCurrency(e.detail.value)}
+                >
+                  {Object.keys(allCoins).map((key, index) => {
+                    return (
+                      <IonSelectOption key={index} value={key}>
+                        {hasKey(allCoins, key) && allCoins[key]}
+                      </IonSelectOption>
+                    );
+                  })}
+                </IonSelect>
+              </IonItem>
+            </div>
+
+            <div className={styles["item"]}>
+              <IonItem>
+                <IonLabel position="floating">Send Amount (PKR)</IonLabel>
                 <IonInput
                   type="number"
                   value={amount}
