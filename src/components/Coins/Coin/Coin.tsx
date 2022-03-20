@@ -32,10 +32,7 @@ const Coin = (props: coinProps) => {
         <h3>{props.name}</h3>
       </div>
       <div className={styles["rightBox"]}>
-        <h3>
-          {/* {price} */}
-          <em>{price}</em>
-        </h3>
+        <h3>{price}</h3>
       </div>
     </div>
   );
