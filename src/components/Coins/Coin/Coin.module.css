@@ -18,27 +18,39 @@
   align-items: center;
 }
 
-.middlebox {
-  width: 40%;
+.leftMiddlebox {
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.middlebox h3 {
-  font-size: 16px;
+.leftMiddlebox h3 {
+  font-size: 14px;
   margin-left: 15px;
 }
 
+.rightMiddlebox {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightMiddlebox h3 {
+  font-size: 11px;
+}
+
 .rightBox {
-  width: 50%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .rightBox h3 {
-  font-size: 16px;
+  font-size: 14px;
+  margin-left: 20px;
 }
 
 .coinPicture {

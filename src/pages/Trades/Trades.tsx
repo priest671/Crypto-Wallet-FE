@@ -13,6 +13,7 @@ import styles from "./Trades.module.css";
 import Button from "../../components/UI/Button/Button";
 import { hasKey } from "../../helper/HelperFunctions";
 import allCoins from "../../data/allCoins.json";
+import myCoins from "../../data/dummyCoins.json";
 
 const Trades = () => {
   const [buyCurrency, setBuyCurrency] = React.useState<string>();
@@ -20,6 +21,32 @@ const Trades = () => {
 
   const [sellCurrency, setSellCurrency] = React.useState<string>();
   const [sellAmount, setSellAmount] = React.useState<string>();
+
+  const buyOptions = Object.keys(allCoins).map((key, index) => {
+    if (hasKey(allCoins, key)) {
+      return (
+        <IonSelectOption key={index} value={allCoins[key].acronym}>
+          {allCoins[key].name}
+        </IonSelectOption>
+      );
+    } else {
+      return null;
+    }
+  });
+
+  const sellOptions = Object.keys(myCoins).map((key, index) => {
+    if (hasKey(myCoins, key)) {
+      return (
+        <IonSelectOption key={index} value={myCoins[key].acronym}>
+          {myCoins[key].name}
+          <span> </span>
+          {myCoins[key].quantity}
+        </IonSelectOption>
+      );
+    } else {
+      return null;
+    }
+  });
 
   const buyFormSubmitHandler = (e: any) => {
     e.preventDefault();
@@ -52,13 +79,7 @@ const Trades = () => {
                   placeholder="Select Currency"
                   onIonChange={(e) => setBuyCurrency(e.detail.value)}
                 >
-                  {Object.keys(allCoins).map((key, index) => {
-                    return (
-                      <IonSelectOption key={index} value={key}>
-                        {hasKey(allCoins, key) && allCoins[key]}
-                      </IonSelectOption>
-                    );
-                  })}
+                  {buyOptions}
                 </IonSelect>
               </IonItem>
             </div>
@@ -98,20 +119,14 @@ const Trades = () => {
                   placeholder="Select Currency"
                   onIonChange={(e) => setSellCurrency(e.detail.value)}
                 >
-                  {Object.keys(allCoins).map((key, index) => {
-                    return (
-                      <IonSelectOption key={index} value={key}>
-                        {hasKey(allCoins, key) && allCoins[key]}
-                      </IonSelectOption>
-                    );
-                  })}
+                  {sellOptions}
                 </IonSelect>
               </IonItem>
             </div>
 
             <div className={styles["item"]}>
               <IonItem>
-                <IonLabel position="floating">Sell Amount (PKR)</IonLabel>
+                <IonLabel position="floating">Sell Amount (QTY)</IonLabel>
                 <IonInput
                   type="number"
                   value={sellAmount}

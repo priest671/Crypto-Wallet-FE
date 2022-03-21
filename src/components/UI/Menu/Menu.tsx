@@ -44,7 +44,7 @@ const Menu: React.FC = () => {
               }}
               className={styles["item"]}
             >
-              <Anchor path="/wallet">My Wallet</Anchor>
+              <Anchor path="/">My Wallet</Anchor>
               <IoIosWallet />
             </div>
             <div

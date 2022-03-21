@@ -36,7 +36,6 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
 import Loader from "./components/UI/Loader/Loader";
-import UserHome from "./pages/UserHome/UserHome";
 import Marketplace from "./pages/Marketplace/Marketplace";
 import Wallet from "./pages/Wallet/Wallet";
 import Transactions from "./pages/Transactions/Transactions";
@@ -59,7 +58,7 @@ const App: React.FC = () => {
             element={
               <Fragment>
                 {isAuth === null && <Loader />}
-                {isAuth === true && <UserHome />}
+                {isAuth === true && <Wallet />}
                 {!isAuth && isAuth !== null && <Home />}
               </Fragment>
             }
@@ -75,8 +74,6 @@ const App: React.FC = () => {
             }
           />
           <Route path="/register" element={<Register />} />
-
-          <Route path="/wallet" element={<Wallet />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/trades" element={<Trades />} />

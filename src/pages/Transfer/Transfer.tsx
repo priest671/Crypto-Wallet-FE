@@ -12,12 +12,24 @@ import Header from "../../components/Header/Header";
 import styles from "./Transfer.module.css";
 import Button from "../../components/UI/Button/Button";
 import { hasKey } from "../../helper/HelperFunctions";
-import allCoins from "../../data/allCoins.json";
+import myCoins from "../../data/dummyCoins.json";
 
 const Transfer = () => {
   const [walletAddress, setWalletAddress] = React.useState<string>();
   const [amount, setAmount] = React.useState<string>();
   const [currency, setCurrency] = React.useState<string>();
+
+  const options = Object.keys(myCoins).map((key, index) => {
+    if (hasKey(myCoins, key)) {
+      return (
+        <IonSelectOption key={index} value={myCoins[key].acronym}>
+          {myCoins[key].name}
+        </IonSelectOption>
+      );
+    } else {
+      return null;
+    }
+  });
 
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
@@ -56,13 +68,7 @@ const Transfer = () => {
                   placeholder="Select Currency"
                   onIonChange={(e) => setCurrency(e.detail.value)}
                 >
-                  {Object.keys(allCoins).map((key, index) => {
-                    return (
-                      <IonSelectOption key={index} value={key}>
-                        {hasKey(allCoins, key) && allCoins[key]}
-                      </IonSelectOption>
-                    );
-                  })}
+                  {options}
                 </IonSelect>
               </IonItem>
             </div>

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.topBox {
+  margin: 10px;
+}
+
+.middleBox {
+  margin: 10px;
+}
+
+.topBox h3 {
+  font-size: 24px;
+}
+
+/* h3 em {
+  color: var(--primary);
+} */
+
+.coinList {
+  margin: 10px 10px 0px 10px;
+  /* background-color: blue; */
+  /* border-radius: 6px; */
+}
