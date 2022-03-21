@@ -24,12 +24,14 @@
 .small {
   font-size: 10px !important;
   height: 34px !important;
+  width: 50%;
 }
 
 .primary-invert {
   background-color: transparent !important;
-  color: var(--secondaryText) !important;
+  color: var(--primary) !important;
   border: 2px solid var(--primary) !important;
+  font-weight: 500;
 }
 
 .secondary {

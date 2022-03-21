@@ -3,19 +3,7 @@ import React from "react";
 import Coins from "../../components/Coins/Coins";
 import Header from "../../components/Header/Header";
 import styles from "./Marketplace.module.css";
-
-let allCoins = {
-  BTC: "Bitcoin",
-  ETH: "Ethereum",
-  ETH2: "Ethereum 2",
-  DOGE: "Dogecoin",
-  ADA: "Cardano",
-  SOL: "Solana",
-  USDT: "Tether",
-  LTC: "Litecoin",
-  SHIB: "SHIBA INU",
-  ATOM: "Cosmos",
-};
+import allCoins from "../../data/allCoins.json";
 
 const Marketplace = () => {
   return (
@@ -27,7 +15,7 @@ const Marketplace = () => {
             <h3>
               Welcome to the <em>Marketplace</em>
             </h3>
-            <p>Check out our most reasonable crypto prices</p>
+            <p>Check out our latest crypto prices</p>
           </div>
           <div className={styles["coinList"]}>
             <Coins allCoins={allCoins} />

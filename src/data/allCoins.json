@@ -1,0 +1,12 @@
+{
+  "BTC": "Bitcoin",
+  "ETH": "Ethereum",
+  "ETH2": "Ethereum 2",
+  "DOGE": "Dogecoin",
+  "ADA": "Cardano",
+  "SOL": "Solana",
+  "USDT": "Tether",
+  "LTC": "Litecoin",
+  "SHIB": "Shiba Inu",
+  "ATOM": "Cosmos"
+}

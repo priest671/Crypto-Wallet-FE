@@ -14,7 +14,7 @@
 
 .header h3 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .header p {
@@ -30,4 +30,8 @@
 
 .footer {
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

@@ -22,8 +22,10 @@ const Register = () => {
         <Header title="Register" />
         <div className={styles["container"]}>
           <div className={styles["header"]}>
-            <h3>Register Account</h3>
-            <p>Get your own Wallet now !</p>
+            <h3>
+              <em>Register</em> Account
+            </h3>
+            <p>Get your own wallet now</p>
           </div>
 
           <form onSubmit={formSubmitHandler}>
@@ -83,7 +85,9 @@ const Register = () => {
             </div>
 
             <div className={styles["footer"]}>
-              <Button className="primary">Register</Button>
+              <Button className="primary" btnClass="small">
+                Register
+              </Button>
             </div>
           </form>
         </div>

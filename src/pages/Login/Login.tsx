@@ -19,8 +19,10 @@ const Login = () => {
         <Header title="Login" />
         <div className={styles["container"]}>
           <div className={styles["header"]}>
-            <h3>Login Your Account</h3>
-            <p>Login using your phone number</p>
+            <h3>
+              <em>Login</em> Your Account
+            </h3>
+            <p>To start using Pak Wallet</p>
           </div>
 
           <form onSubmit={formSubmitHandler}>
@@ -47,7 +49,9 @@ const Login = () => {
             </div>
 
             <div className={styles["footer"]}>
-              <Button className="primary">Login</Button>
+              <Button className="primary" btnClass="small">
+                Login
+              </Button>
             </div>
           </form>
         </div>

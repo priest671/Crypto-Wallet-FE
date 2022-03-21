@@ -12,19 +12,7 @@ import Header from "../../components/Header/Header";
 import styles from "./Transfer.module.css";
 import Button from "../../components/UI/Button/Button";
 import { hasKey } from "../../helper/HelperFunctions";
-
-let allCoins = {
-  BTC: "Bitcoin",
-  ETH: "Ethereum",
-  ETH2: "Ethereum 2",
-  DOGE: "Dogecoin",
-  ADA: "Cardano",
-  SOL: "Solana",
-  USDT: "Tether",
-  LTC: "Litecoin",
-  SHIB: "SHIBA INU",
-  ATOM: "Cosmos",
-};
+import allCoins from "../../data/allCoins.json";
 
 const Transfer = () => {
   const [walletAddress, setWalletAddress] = React.useState<string>();
@@ -42,8 +30,10 @@ const Transfer = () => {
         <Header title="Transfer" />
         <div className={styles["container"]}>
           <div className={styles["header"]}>
-            <h3>Transfer Crypto Currency</h3>
-            <p>Send amount from your Wallet</p>
+            <h3>
+              <em>Transfer</em> Crypto
+            </h3>
+            <p>Send amount from your wallet</p>
           </div>
 
           <form onSubmit={formSubmitHandler}>
@@ -89,7 +79,9 @@ const Transfer = () => {
             </div>
 
             <div className={styles["footer"]}>
-              <Button className="primary">Transfer Crypto</Button>
+              <Button className="primary" btnClass="small">
+                Send
+              </Button>
             </div>
           </form>
         </div>

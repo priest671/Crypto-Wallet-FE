@@ -12,19 +12,7 @@ import Header from "../../components/Header/Header";
 import styles from "./Trades.module.css";
 import Button from "../../components/UI/Button/Button";
 import { hasKey } from "../../helper/HelperFunctions";
-
-let allCoins = {
-  BTC: "Bitcoin",
-  ETH: "Ethereum",
-  ETH2: "Ethereum 2",
-  DOGE: "Dogecoin",
-  ADA: "Cardano",
-  SOL: "Solana",
-  USDT: "Tether",
-  LTC: "Litecoin",
-  SHIB: "SHIBA INU",
-  ATOM: "Cosmos",
-};
+import allCoins from "../../data/allCoins.json";
 
 const Trades = () => {
   const [buyCurrency, setBuyCurrency] = React.useState<string>();
@@ -49,7 +37,9 @@ const Trades = () => {
         <Header title="Trades" />
         <div className={styles["container"]}>
           <div className={styles["header"]}>
-            <h3>Buy Crypto</h3>
+            <h3>
+              <em>Buy</em> Crypto
+            </h3>
             <p>At the most reasonable price</p>
           </div>
 
@@ -85,12 +75,17 @@ const Trades = () => {
             </div>
 
             <div className={styles["footer"]}>
-              <Button className="primary">Buy</Button>
+              <Button className="primary" btnClass="small">
+                Buy
+              </Button>
             </div>
           </form>
+          <hr />
 
           <div className={styles["header"]}>
-            <h3>Sell Crypto</h3>
+            <h3>
+              <em>Sell</em> Crypto
+            </h3>
             <p>At the most profitable price</p>
           </div>
 
@@ -126,7 +121,9 @@ const Trades = () => {
             </div>
 
             <div className={styles["footer"]}>
-              <Button className="primary">Sell</Button>
+              <Button className="primary" btnClass="small">
+                Sell
+              </Button>
             </div>
           </form>
         </div>
