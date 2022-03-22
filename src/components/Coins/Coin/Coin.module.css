@@ -5,10 +5,10 @@
   width: 100%;
   padding: 5px;
   /* border: 1px solid var(--ion-card-background); */
-  /* border: 1px solid var(--primary); */
-  border: 1px solid white;
-  /* margin: 5px 0 5px 0;
-  border-radius: 6px; */
+  border: 1px solid var(--primary);
+  /* border: 1px solid white; */
+  margin: 5px 0 5px 0;
+  border-radius: 6px;
 }
 
 .leftBox {
