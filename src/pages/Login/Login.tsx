@@ -1,4 +1,5 @@
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
+import axios from "axios";
 import React from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
@@ -11,6 +12,9 @@ const Login = () => {
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
     console.log(phone, password);
+    // axios.post("http://localhost:5000/auth/login").then((res) => {
+    //   console.log(res);
+    // });
   };
 
   return (

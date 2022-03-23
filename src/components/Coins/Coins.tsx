@@ -24,21 +24,23 @@ const Coins = (props: coinsProps) => {
           quantity={props.allCoins[key].quantity}
         />
       );
+    } else {
+      return null;
     }
   });
 
   return (
-    <div className={styles["wrapper"]}>
+    <div className={styles["coins-wrapper"]}>
       <div className={styles["gridHeader"]}>
-        <div className={styles["left"]}>
-          <h3>Currency</h3>
+        <div className={styles["coin"]}>
+          <p className={styles["coin-heading"]}>Currency</p>
         </div>
-        <div className={styles["middle"]}>
-          <h3>QTY</h3>
+        <div className={styles["quantity"]}>
+          <p className={styles["coin-heading"]}>QTY</p>
         </div>
 
-        <div className={styles["right"]}>
-          <h3>Price (PKR)</h3>
+        <div className={styles["price"]}>
+          <p className={styles["coin-heading"]}>Price (PKR)</p>
         </div>
       </div>
       {coins}

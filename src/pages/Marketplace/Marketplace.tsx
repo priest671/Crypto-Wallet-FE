@@ -6,6 +6,7 @@ import styles from "./Marketplace.module.css";
 import allCoins from "../../data/allCoins.json";
 
 const Marketplace = () => {
+  console.log(allCoins);
   return (
     <IonPage id="main">
       <IonContent>

@@ -26,24 +26,20 @@ const Coin = (props: coinProps) => {
 
   return (
     <div className={styles["wrapper"]}>
-      <div className={styles["leftBox"]}>
-        <img
-          src={`images/${props.acronym}.png`}
-          className={styles["coinPicture"]}
-          alt="IMG"
-        />
+      <div className={`${styles["item"]} ${styles["coin"]}`}>
+        <div className={styles["coin-picture"]}>
+          <img src={`images/${props.acronym}.png`} alt="IMG" />
+        </div>
+
+        <p className={styles["coin-name"]}>{props.name}</p>
       </div>
 
-      <div className={styles["leftMiddlebox"]}>
-        <h3>{props.name}</h3>
+      <div className={`${styles["item"]} ${styles["quantity"]}`}>
+        <p>{props.quantity}</p>
       </div>
 
-      <div className={styles["rightMiddlebox"]}>
-        <h3>{props.quantity}</h3>
-      </div>
-
-      <div className={styles["rightBox"]}>
-        <h3>{price}</h3>
+      <div className={`${styles["item"]} ${styles["price"]}`}>
+        <p>{price}</p>
       </div>
     </div>
   );

@@ -2,12 +2,12 @@
   "PKR": {
     "name": "Rupees",
     "acronym": "PKR",
-    "quantity": 30000
+    "quantity": 3000000
   },
   "BTC": {
     "name": "Bitcoin",
     "acronym": "BTC",
-    "quantity": 0.00041
+    "quantity": 0.000041
   },
   "ETH": {
     "name": "Ethereum",

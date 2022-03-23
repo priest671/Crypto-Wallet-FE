@@ -46,7 +46,7 @@ import Transfer from "./pages/Transfer/Transfer";
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <IonApp>

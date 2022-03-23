@@ -1,44 +1,35 @@
+.coins-wrapper {
+  display: flex;
+  flex-flow: wrap column;
+  align-items: center;
+}
+
 .gridHeader {
-  /* background-color: var(--primary); */
-  height: 60px;
+  height: 30px;
   width: 100%;
   display: flex;
-  border: 1px solid var(--primary);
-  /* border-radius: 6px; */
+  color: var(--example-label);
+  font-size: 12px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
 }
 
-.left {
-  width: 40%;
-  justify-content: center;
-  align-items: center;
+.coin {
+  width: 45%;
   text-align: left;
 }
-.left h3 {
-  margin-left: 20px;
-  font-size: 18px;
-  font-weight: 600;
-}
 
-.middle {
-  width: 20%;
-  justify-content: center;
-  align-items: center;
+.quantity {
+  width: 15%;
   text-align: center;
 }
-.middle h3 {
-  font-size: 14px;
-  font-weight: 600;
-}
 
-.right {
+.price {
   width: 40%;
-  justify-content: center;
-  align-items: center;
   text-align: right;
 }
 
-.right h3 {
-  margin-right: 20px;
-  font-size: 18px;
-  font-weight: 600;
+.coin-heading {
+  text-transform: uppercase;
 }

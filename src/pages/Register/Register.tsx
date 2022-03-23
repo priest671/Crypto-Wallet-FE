@@ -1,4 +1,5 @@
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
+import axios from "axios";
 import React from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
@@ -14,6 +15,23 @@ const Register = () => {
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
     console.log(name, phone, email, password, confirmPassword);
+    let phoneNumber = phone;
+
+    axios
+      .post("http://localhost:5000/auth/register", {
+        name,
+        phoneNumber,
+        email,
+        password,
+        confirmPassword,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        // console.log(typeof err.response.data);
+        console.log(err.response.data);
+      });
   };
 
   return (
