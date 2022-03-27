@@ -77,9 +77,27 @@ const Transactions = () => {
             <p>See yout transaction history</p>
           </div>
           <div className={styles["transactions-list"]}>
-            {allTransactions.map((transaction, index) => (
+            <div className={styles["grid-header"]}>
+              <div className={styles["type"]}>
+                <p className={styles["transaction-heading"]}>Type</p>
+              </div>
+
+              <div className={styles["coin"]}>
+                <p className={styles["transaction-heading"]}>Currency</p>
+              </div>
+
+              <div className={styles["quantity"]}>
+                <p className={styles["transaction-heading"]}>QTY</p>
+              </div>
+
+              <div className={styles["destination"]}>
+                <p className={styles["transaction-heading"]}>Destination</p>
+              </div>
+            </div>
+
+            {allTransactions.map((transaction) => (
               <Transaction
-                key={index}
+                key={transaction.id}
                 id={transaction.id}
                 coin={transaction.coin}
                 quantity={transaction.quantity}
