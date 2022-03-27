@@ -31,9 +31,7 @@ const Header: React.FC<Props> = (props) => {
   return (
     <div className={styles["container"]}>
       {backButton}
-      <div className={styles["heading"]}>
-        <h3>{props.title}</h3>
-      </div>
+      <p>{props.title}</p>
     </div>
   );
 };
