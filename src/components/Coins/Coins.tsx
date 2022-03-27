@@ -31,7 +31,7 @@ const Coins = (props: coinsProps) => {
 
   return (
     <div className={styles["coins-wrapper"]}>
-      <div className={styles["gridHeader"]}>
+      <div className={styles["grid-header"]}>
         <div className={styles["coin"]}>
           <p className={styles["coin-heading"]}>Currency</p>
         </div>

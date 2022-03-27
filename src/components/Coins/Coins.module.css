@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.gridHeader {
+.grid-header {
   height: 30px;
   width: 100%;
   display: flex;

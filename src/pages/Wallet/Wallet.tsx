@@ -14,18 +14,18 @@ const Wallet = () => {
       <IonContent>
         <Header title="Wallet" />
         <div className={styles["container"]}>
-          <div className={styles["topBox"]}>
+          <div className={styles["top-box"]}>
             <h3>
               Your <em>Wallet</em>
             </h3>
             <p>Your Wallet Address: {walletAddress}</p>
           </div>
 
-          <div className={styles["middleBox"]}>
+          <div className={styles["middle-box"]}>
             <h3>Balance: {walletBalance} PKR</h3>
           </div>
 
-          <div className={styles["coinList"]}>
+          <div className={styles["coin-list"]}>
             <Coins allCoins={myCoins} />
           </div>
         </div>

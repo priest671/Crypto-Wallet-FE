@@ -5,24 +5,18 @@
   padding: 0;
 }
 
-.topBox {
+.top-box {
   margin: 10px;
 }
 
-.middleBox {
+.middle-box {
   margin: 10px;
 }
 
-.topBox h3 {
+.top-box h3 {
   font-size: 24px;
 }
 
-/* h3 em {
-  color: var(--primary);
-} */
-
-.coinList {
+.coin-list {
   margin: 10px 10px 0px 10px;
-  /* background-color: blue; */
-  /* border-radius: 6px; */
 }

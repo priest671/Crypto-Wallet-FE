@@ -12,13 +12,13 @@ const Marketplace = () => {
       <IonContent>
         <Header title="Marketplace" />
         <div className={styles["container"]}>
-          <div className={styles["topBox"]}>
+          <div className={styles["top-box"]}>
             <h3>
               Welcome to the <em>Marketplace</em>
             </h3>
             <p>Check out our latest crypto prices</p>
           </div>
-          <div className={styles["coinList"]}>
+          <div className={styles["coin-list"]}>
             <Coins allCoins={allCoins} />
           </div>
         </div>
