@@ -33,7 +33,7 @@ const Coins = (props: coinsProps) => {
     <div className={styles["coins-wrapper"]}>
       <div className={styles["grid-header"]}>
         <div className={styles["coin"]}>
-          <p className={styles["coin-heading"]}>Currency</p>
+          <p className={styles["coin-heading"]}>Coin</p>
         </div>
         <div className={styles["quantity"]}>
           <p className={styles["coin-heading"]}>QTY</p>

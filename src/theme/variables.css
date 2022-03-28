@@ -15,6 +15,8 @@ http://ionicframework.com/docs/theming/ */
   --primary: #fcd536;
   --negativeCTA: #f84960;
   --secondary: #121212;
+  --positiveCTA: #0ecb81;
+
   /** primary **/
   --ion-color-primary: #fcd536;
   --ion-color-primary-rgb: 252, 213, 54;

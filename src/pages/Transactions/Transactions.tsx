@@ -11,8 +11,7 @@ let allTransactions = [
     quantity: "0.0001",
     date: "2020-01-01",
     type: "send",
-    to: "0x08cb58736",
-    from: "0x08cb58736",
+    terminal: "0x08cb58736",
   },
   {
     id: 2,
@@ -20,8 +19,7 @@ let allTransactions = [
     quantity: "0.01",
     date: "2020-01-01",
     type: "recieve",
-    to: "0x08cb58736",
-    from: "0x08cb58736",
+    terminal: "0x08cb58736",
   },
 
   {
@@ -30,8 +28,7 @@ let allTransactions = [
     quantity: "30.00",
     date: "2020-01-01",
     type: "send",
-    to: "0x08cb58736",
-    from: "0x08cb58736",
+    terminal: "0x08cb58736",
   },
 
   {
@@ -40,8 +37,7 @@ let allTransactions = [
     quantity: "50.00",
     date: "2020-01-01",
     type: "recieve",
-    to: "0x08cb58736",
-    from: "0x08cb58736",
+    terminal: "0x08cb58736",
   },
 
   {
@@ -50,8 +46,7 @@ let allTransactions = [
     quantity: "100.00",
     date: "2020-01-01",
     type: "send",
-    to: "0x08cb58736",
-    from: "0x08cb58736",
+    terminal: "0x08cb58736",
   },
   {
     id: 6,
@@ -59,8 +54,7 @@ let allTransactions = [
     quantity: "1.00",
     date: "2020-01-01",
     type: "recieve",
-    to: "0x08cb58736",
-    from: "0x08cb58736",
+    terminal: "0x08cb58736",
   },
 ];
 
@@ -83,15 +77,15 @@ const Transactions = () => {
               </div>
 
               <div className={styles["coin"]}>
-                <p className={styles["transaction-heading"]}>Currency</p>
+                <p className={styles["transaction-heading"]}>Coin</p>
               </div>
 
               <div className={styles["quantity"]}>
                 <p className={styles["transaction-heading"]}>QTY</p>
               </div>
 
-              <div className={styles["destination"]}>
-                <p className={styles["transaction-heading"]}>Destination</p>
+              <div className={styles["terminal"]}>
+                <p className={styles["transaction-heading"]}>To / From</p>
               </div>
             </div>
 
@@ -103,8 +97,7 @@ const Transactions = () => {
                 quantity={transaction.quantity}
                 date={transaction.date}
                 type={transaction.type}
-                to={transaction.to}
-                from={transaction.from}
+                terminal={transaction.terminal}
               />
             ))}
           </div>

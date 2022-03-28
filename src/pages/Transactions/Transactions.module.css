@@ -47,9 +47,9 @@ h3 em {
   text-align: center;
 }
 
-.destination {
+.terminal {
   width: 30%;
-  text-align: center;
+  text-align: right;
 }
 
 .transaction-heading {
