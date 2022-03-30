@@ -26,8 +26,6 @@ const Login = () => {
           password,
         })
       );
-
-      console.log(response);
       if (response) {
         dispatch(
           authActions.login({
