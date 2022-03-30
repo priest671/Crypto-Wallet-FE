@@ -1,42 +1,46 @@
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
-import axios from "axios";
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
+import { registerAPI } from "../../store/Authentication/authenticationActions";
+import { useAppDispatch } from "../../store/hooks";
 import styles from "./Register.module.css";
 
 const Register = () => {
-  const [name, setName] = useState<string>();
-  const [phoneNumber, setPhoneNumber] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [confirmPassword, setConfirmPassword] = useState<string>();
-  const [error, setError] = useState<string>();
-  const [errorStatus, setErrorStatus] = useState<string>();
+  const [name, setName] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const formSubmitHandler = (e: any) => {
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
+  const formSubmitHandler = async (e: any) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/auth/register", {
-        name,
-        phoneNumber,
-        email,
-        password,
-        confirmPassword,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        // console.log(typeof err.response.data);
-        let errorMessage = JSON.stringify(err.response.data);
-        errorMessage = errorMessage.split("Error: ")[1];
-        errorMessage = errorMessage.split(".")[0];
+    e.preventDefault();
 
-        setError(errorMessage);
-        setErrorStatus(err.response.status);
-      });
+    try {
+      let response = await dispatch(
+        registerAPI({
+          name,
+          phoneNumber,
+          email,
+          password,
+          confirmPassword,
+        })
+      );
+      if (response) {
+        navigate("/login");
+      }
+    } catch (err: any) {
+      console.log(err.statusCode);
+      console.log(err.message);
+    }
   };
 
   return (
@@ -58,8 +62,7 @@ const Register = () => {
                 <IonInput
                   type="text"
                   value={name}
-                  onIonChange={(e) => setName(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setName(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -69,8 +72,7 @@ const Register = () => {
                 <IonInput
                   type="number"
                   value={phoneNumber}
-                  onIonChange={(e) => setPhoneNumber(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setPhoneNumber(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -80,8 +82,7 @@ const Register = () => {
                 <IonInput
                   type="email"
                   value={email}
-                  onIonChange={(e) => setEmail(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setEmail(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -91,8 +92,7 @@ const Register = () => {
                 <IonInput
                   type="password"
                   value={password}
-                  onIonChange={(e) => setPassword(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setPassword(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -102,8 +102,7 @@ const Register = () => {
                 <IonInput
                   type="password"
                   value={confirmPassword}
-                  onIonChange={(e) => setConfirmPassword(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setConfirmPassword(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 

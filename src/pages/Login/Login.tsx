@@ -1,13 +1,14 @@
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
 import React, { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
-import { sendLoginData } from "../../store/Authentication/authenticationActions";
+import { loginAPI } from "../../store/Authentication/authenticationActions";
 import { authActions } from "../../store/Authentication/authentication";
 
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
+import { getUserAPI } from "../../store/User/userActions";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,20 +22,28 @@ const Login = () => {
 
     try {
       let response = await dispatch(
-        sendLoginData({
+        loginAPI({
           phoneNumber,
           password,
         })
       );
       if (response) {
-        dispatch(
-          authActions.login({
-            isAuth: true,
-            token: response.data.token,
-            userId: response.data.user._id,
-          })
-        );
-        navigate("/");
+        try {
+          dispatch(
+            authActions.login({
+              isAuth: true,
+              token: response.data.token,
+              userId: response.data.user._id,
+            })
+          );
+
+          dispatch(getUserAPI(response.data.user._id, response.data.token));
+
+          navigate("/");
+        } catch (err: any) {
+          console.log(err.statusCode);
+          console.log(err.message);
+        }
       }
     } catch (err: any) {
       console.log(err.statusCode);
@@ -61,8 +70,7 @@ const Login = () => {
                 <IonInput
                   type="number"
                   value={phoneNumber}
-                  onIonChange={(e) => setPhoneNumber(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setPhoneNumber(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -72,8 +80,7 @@ const Login = () => {
                 <IonInput
                   type="password"
                   value={password}
-                  onIonChange={(e) => setPassword(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setPassword(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 

@@ -4,10 +4,11 @@ import Coins from "../../components/Coins/Coins";
 import Header from "../../components/Header/Header";
 import styles from "./Wallet.module.css";
 import myCoins from "../../data/dummyCoins.json";
+import { useAppSelector } from "../../store/hooks";
 
 const Wallet = () => {
   let walletAddress = "0x08cb58736";
-  let walletBalance = "130000";
+  let walletBalance = "10000";
 
   return (
     <IonPage id="main">

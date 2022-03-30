@@ -8,7 +8,7 @@ interface loginDataType {
   password: string;
 }
 
-export const sendLoginData = (loginData: loginDataType) => {
+export const loginAPI = (loginData: loginDataType) => {
   return async (dispatch: any) => {
     const sendRequest = async () => {
       return await axios.post(`${backendLink}/auth/login`, loginData);
@@ -16,7 +16,6 @@ export const sendLoginData = (loginData: loginDataType) => {
 
     try {
       const response = await sendRequest();
-
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.user._id);
       return response;
@@ -60,26 +59,37 @@ interface registerationDataType {
   confirmPassword: string;
 }
 
-export const sendRegisterationData = (
-  registerationData: registerationDataType
-) => {
+export const registerAPI = (registerationData: registerationDataType) => {
   return async (dispatch: any) => {
     const sendRequest = async () => {
-      axios.post(`${backendLink}/auth/signup`, registerationData);
+      return await axios.post(`${backendLink}/auth/register`, registerationData);
     };
 
     try {
-      await sendRequest();
-      //show success message
+      const response = await sendRequest();
+      return response;
     } catch (err: any) {
       if (err.response.status === 422) {
-        console.log("Validation Failed!");
-        //useRef here to display Error
+        let errorMessage = JSON.stringify(err.response.data);
+        errorMessage = errorMessage.split("Error: ")[1];
+        errorMessage = errorMessage.split("<br>")[0];
+
+        const error = new Error(errorMessage);
+        error.statusCode = err.response.status;
+        error.message = errorMessage;
+        throw error;
       }
 
+      // Authentication Check.
       if (err.response.status !== 200 && err.response.status !== 201) {
-        console.log("Creating a user failed!");
-        //useRef here to display Error
+        let errorMessage = JSON.stringify(err.response.data);
+        errorMessage = errorMessage.split("Error: ")[1];
+        errorMessage = errorMessage.split("<br>")[0];
+
+        const error = new Error(errorMessage);
+        error.statusCode = err.response.status;
+        error.message = errorMessage;
+        throw error;
       }
     }
   };

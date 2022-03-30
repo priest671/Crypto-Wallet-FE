@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { IonMenu, IonContent } from "@ionic/react";
 
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import styles from "./Menu.module.css";
 import Anchor from "../Anchor/Anchor";
 
@@ -20,8 +20,8 @@ const Menu: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  let name = "Hiba Razzaq";
-  let balance = "130000";
+  let name = useAppSelector((state) => state.user.name);
+  let balance = 10000;
 
   const logoutHandler = () => {
     setDisabled(true);
@@ -55,8 +55,7 @@ const Menu: React.FC = () => {
                 setDisabled(true);
                 setTimeout(() => setDisabled(false), 100);
               }}
-              className={styles["item"]}
-            >
+              className={styles["item"]}>
               <Anchor path="/">My Wallet</Anchor>
               <IoIosWallet />
             </div>
@@ -65,8 +64,7 @@ const Menu: React.FC = () => {
                 setDisabled(true);
                 setTimeout(() => setDisabled(false), 100);
               }}
-              className={styles["item"]}
-            >
+              className={styles["item"]}>
               <Anchor path="/transactions">My Transactions</Anchor>
               <AiOutlineTransaction />
             </div>
@@ -75,15 +73,13 @@ const Menu: React.FC = () => {
                 setDisabled(true);
                 setTimeout(() => setDisabled(false), 100);
               }}
-              className={styles["item"]}
-            >
+              className={styles["item"]}>
               <Anchor
                 onClick={() => {
                   setDisabled(true);
                   setTimeout(() => setDisabled(false), 100);
                 }}
-                path="/marketplace"
-              >
+                path="/marketplace">
                 Marketplace
               </Anchor>
               <GiTrade />
@@ -93,8 +89,7 @@ const Menu: React.FC = () => {
                 setDisabled(true);
                 setTimeout(() => setDisabled(false), 100);
               }}
-              className={styles["item"]}
-            >
+              className={styles["item"]}>
               <Anchor path="/trades">Buy and Sell Crypto</Anchor>
               <GiBuyCard />
             </div>
@@ -103,8 +98,7 @@ const Menu: React.FC = () => {
                 setDisabled(true);
                 setTimeout(() => setDisabled(false), 100);
               }}
-              className={styles["item"]}
-            >
+              className={styles["item"]}>
               <Anchor path="/transfer">Transfer Crypto</Anchor>
               <BiTransfer />
             </div>
@@ -114,8 +108,7 @@ const Menu: React.FC = () => {
                 setDisabled(true);
                 setTimeout(() => setDisabled(false), 100);
               }}
-              className={styles["item"]}
-            >
+              className={styles["item"]}>
               <Anchor path="/usersetting">Settings</Anchor>
               <AiTwotoneSetting />
             </div>
