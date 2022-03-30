@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { IonMenu, IonContent } from "@ionic/react";
 
+import { useAppDispatch } from "../../../store/hooks";
 import styles from "./Menu.module.css";
 import Anchor from "../Anchor/Anchor";
 
@@ -11,11 +12,23 @@ import { AiOutlineTransaction, AiTwotoneSetting } from "react-icons/ai";
 import { GiTrade, GiBuyCard } from "react-icons/gi";
 import { BiTransfer } from "react-icons/bi";
 import Button from "../Button/Button";
+import { logout } from "../../../store/Authentication/authenticationActions";
+import { useNavigate } from "react-router-dom";
 
 const Menu: React.FC = () => {
   const [disabled, setDisabled] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   let name = "Hiba Razzaq";
   let balance = "130000";
+
+  const logoutHandler = () => {
+    setDisabled(true);
+    setTimeout(() => setDisabled(false), 100);
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
     <Fragment>
@@ -110,11 +123,9 @@ const Menu: React.FC = () => {
 
           <div className={styles["footer"]}>
             <div className={styles["footerContainer"]}>
-              <Anchor path="/register">
-                <Button className="delete">
-                  <p>Logout</p>
-                </Button>
-              </Anchor>
+              <Button className="delete" onClick={logoutHandler}>
+                <p>Logout</p>
+              </Button>
             </div>
           </div>
         </IonContent>

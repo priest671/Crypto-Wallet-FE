@@ -1,21 +1,21 @@
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
 import styles from "./Register.module.css";
 
 const Register = () => {
-  const [name, setName] = React.useState<string>();
-  const [phone, setPhone] = React.useState<string>();
-  const [email, setEmail] = React.useState<string>();
-  const [password, setPassword] = React.useState<string>();
-  const [confirmPassword, setConfirmPassword] = React.useState<string>();
+  const [name, setName] = useState<string>();
+  const [phoneNumber, setPhoneNumber] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [confirmPassword, setConfirmPassword] = useState<string>();
+  const [error, setError] = useState<string>();
+  const [errorStatus, setErrorStatus] = useState<string>();
 
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(name, phone, email, password, confirmPassword);
-    let phoneNumber = phone;
 
     axios
       .post("http://localhost:5000/auth/register", {
@@ -30,7 +30,12 @@ const Register = () => {
       })
       .catch((err) => {
         // console.log(typeof err.response.data);
-        console.log(err.response.data);
+        let errorMessage = JSON.stringify(err.response.data);
+        errorMessage = errorMessage.split("Error: ")[1];
+        errorMessage = errorMessage.split(".")[0];
+
+        setError(errorMessage);
+        setErrorStatus(err.response.status);
       });
   };
 
@@ -63,8 +68,8 @@ const Register = () => {
                 <IonLabel position="floating">Phone Number</IonLabel>
                 <IonInput
                   type="number"
-                  value={phone}
-                  onIonChange={(e) => setPhone(e.detail.value!)}
+                  value={phoneNumber}
+                  onIonChange={(e) => setPhoneNumber(e.detail.value!)}
                 ></IonInput>
               </IonItem>
             </div>

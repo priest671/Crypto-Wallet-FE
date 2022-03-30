@@ -13,8 +13,8 @@ const Header: React.FC<Props> = (props) => {
   if (props.title !== "Login" && props.title !== "Register") {
     backButton = (
       <IonButtons>
-        <IonMenuToggle>
-          <IonMenuButton />
+        <IonMenuToggle hidden={false} autoHide={false}>
+          <IonMenuButton hidden={false} autoHide={false} />
         </IonMenuToggle>
       </IonButtons>
     );

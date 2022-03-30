@@ -22,13 +22,17 @@ import { IonApp, setupIonicReact } from "@ionic/react";
 
 //React Imports
 import "./theme/variables.css";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
+
+//Redux Imports
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { fetchUser } from "./store/User/userActions";
 
 //Pages Imports
 import Menu from "./components/UI/Menu/Menu";
@@ -42,11 +46,38 @@ import Transactions from "./pages/Transactions/Transactions";
 import UserSetting from "./pages/UserSetting/UserSetting";
 import Trades from "./pages/Trades/Trades";
 import Transfer from "./pages/Transfer/Transfer";
+import { authActions } from "./store/Authentication/authentication";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [isAuth, setIsAuth] = useState(true);
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector((state) => state.authentication.isAuth);
+  console.log("isAuth", isAuth);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      return;
+    }
+
+    dispatch(
+      authActions.login({
+        isAuth: true,
+        token,
+        userId,
+      })
+    );
+
+    // dispatch(fetchUser(userId, token));
+  }, [dispatch]);
 
   return (
     <IonApp>

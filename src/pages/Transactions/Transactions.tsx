@@ -11,7 +11,7 @@ let allTransactions = [
     quantity: "0.0001",
     date: "2020-01-01",
     type: "send",
-    terminal: "0x08cb58736",
+    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ let allTransactions = [
     quantity: "0.01",
     date: "2020-01-01",
     type: "recieve",
-    terminal: "0x08cb58736",
+    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
   },
 
   {
@@ -28,7 +28,7 @@ let allTransactions = [
     quantity: "30.00",
     date: "2020-01-01",
     type: "send",
-    terminal: "0x08cb58736",
+    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
   },
 
   {
@@ -37,7 +37,7 @@ let allTransactions = [
     quantity: "50.00",
     date: "2020-01-01",
     type: "recieve",
-    terminal: "0x08cb58736",
+    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
   },
 
   {
@@ -46,7 +46,7 @@ let allTransactions = [
     quantity: "100.00",
     date: "2020-01-01",
     type: "send",
-    terminal: "0x08cb58736",
+    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
   },
   {
     id: 6,
@@ -54,7 +54,7 @@ let allTransactions = [
     quantity: "1.00",
     date: "2020-01-01",
     type: "recieve",
-    terminal: "0x08cb58736",
+    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
   },
 ];
 

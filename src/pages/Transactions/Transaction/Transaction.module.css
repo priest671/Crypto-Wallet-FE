@@ -67,4 +67,16 @@
 .terminal {
   width: 30%;
   justify-content: flex-end;
+
+  /*. Clip Text (show in modal) */
+  overflow: clip;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  /*. Display Small Text */
+  /* display: inline-block;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 9px;
+  color: var(--example-label); */
 }
