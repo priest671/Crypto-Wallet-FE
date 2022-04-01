@@ -37,7 +37,7 @@ const Login = () => {
             })
           );
 
-          dispatch(getUserAPI(response.data.user._id, response.data.token));
+          //  dispatch(getUserAPI(response.data.user._id, response.data.token));
 
           navigate("/");
         } catch (err: any) {

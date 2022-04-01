@@ -5,7 +5,7 @@ import { backendLink } from "../../helper/BackendLink";
 export const getUserAPI = (userId: string, token: string) => {
   return async (dispatch: any) => {
     const sendRequest = async () => {
-      return await axios.get(`${backendLink}/user/getUser/${userId}`, {
+      return await axios.get(`${backendLink}/user/${userId}`, {
         headers: {
           Authorization: "Bearer " + token,
         },
