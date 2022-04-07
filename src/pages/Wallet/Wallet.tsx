@@ -1,14 +1,22 @@
 import { IonContent, IonPage } from "@ionic/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Coins from "../../components/Coins/Coins";
 import Header from "../../components/Header/Header";
 import styles from "./Wallet.module.css";
-import myCoins from "../../data/dummyCoins.json";
-import { useAppSelector } from "../../store/hooks";
+// import myCoins from "../../data/dummyCoins.json";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { updateBalance } from "../../store/Wallet/WalletActions";
 
 const Wallet = () => {
-  let walletAddress = "0x08cb58736";
-  let walletBalance = "10000";
+  let walletAddress = useAppSelector((state) => state.wallet.address);
+  let walletBalance = useAppSelector((state) => state.wallet.balance);
+  let myCoins = useAppSelector((state) => state.wallet.coins);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(updateBalance(myCoins));
+  }, []);
 
   return (
     <IonPage id="main">

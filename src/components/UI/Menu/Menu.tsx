@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { IonMenu, IonContent } from "@ionic/react";
 
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -9,19 +9,29 @@ import Anchor from "../Anchor/Anchor";
 import { SiBitcoincash } from "react-icons/si";
 import { IoIosWallet } from "react-icons/io";
 import { AiOutlineTransaction, AiTwotoneSetting } from "react-icons/ai";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { GiTrade, GiBuyCard } from "react-icons/gi";
 import { BiTransfer } from "react-icons/bi";
 import Button from "../Button/Button";
-import { logout } from "../../../store/Authentication/authenticationActions";
+import { logout } from "../../../store/Authentication/AuthenticationActions";
 import { useNavigate } from "react-router-dom";
 
 const Menu: React.FC = () => {
-  const [disabled, setDisabled] = React.useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [displayAdmin, setDisplayAdmin] = useState(false);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   let name = useAppSelector((state) => state.user.name);
-  let balance = 10000;
+  let balance = useAppSelector((state) => state.wallet.balance);
+  let role = useAppSelector((state) => state.user.role);
+
+  useEffect(() => {
+    if (role === "admin") {
+      setDisplayAdmin(true);
+    }
+  }, [role]);
 
   const logoutHandler = () => {
     setDisabled(true);
@@ -113,6 +123,18 @@ const Menu: React.FC = () => {
               <AiTwotoneSetting />
             </div>
           </div>
+
+          {displayAdmin && (
+            <div
+              onClick={() => {
+                setDisabled(true);
+                setTimeout(() => setDisabled(false), 100);
+              }}
+              className={styles["item"]}>
+              <Anchor path="/usersetting">Admin</Anchor>
+              <MdAdminPanelSettings />
+            </div>
+          )}
 
           <div className={styles["footer"]}>
             <div className={styles["footerContainer"]}>

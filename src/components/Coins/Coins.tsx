@@ -1,33 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Coin from "./Coin/Coin";
 import styles from "./Coins.module.css";
-import { hasKey } from "../../helper/HelperFunctions";
-
-interface singleCoinType {
-  name: string;
-  acronym: string;
-  quantity: number;
-}
+// import { hasKey } from "../../helper/HelperFunctions";
 
 interface coinsProps {
-  allCoins: { [key: string]: singleCoinType };
+  allCoins: any;
 }
 
 const Coins = (props: coinsProps) => {
-  const coins = Object.keys(props.allCoins).map((key, index) => {
-    if (hasKey(props.allCoins, key)) {
-      return (
-        <Coin
-          key={index}
-          name={props.allCoins[key].name}
-          acronym={props.allCoins[key].acronym}
-          quantity={props.allCoins[key].quantity}
-        />
-      );
-    } else {
-      return null;
-    }
-  });
+  let coins;
+  let hasQuantity = false;
+
+  if (props.allCoins) {
+    coins = props.allCoins.map((coin: any, index: number) => {
+      if (coin.quantity) {
+        hasQuantity = true;
+        return (
+          <Coin
+            key={index}
+            name={coin.coin.name}
+            acronym={coin.coin.acronym}
+            quantity={coin.quantity}
+          />
+        );
+      } else {
+        return <Coin key={index} name={coin.name} acronym={coin.acronym} />;
+      }
+    });
+  }
 
   return (
     <div className={styles["coins-wrapper"]}>
@@ -35,9 +35,12 @@ const Coins = (props: coinsProps) => {
         <div className={styles["coin"]}>
           <p className={styles["coin-heading"]}>Coin</p>
         </div>
-        <div className={styles["quantity"]}>
-          <p className={styles["coin-heading"]}>QTY</p>
-        </div>
+
+        {hasQuantity && (
+          <div className={styles["quantity"]}>
+            <p className={styles["coin-heading"]}>QTY</p>
+          </div>
+        )}
 
         <div className={styles["price"]}>
           <p className={styles["coin-heading"]}>Price (PKR)</p>

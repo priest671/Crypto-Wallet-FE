@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
-import { registerAPI } from "../../store/Authentication/authenticationActions";
+import { registerAPI } from "../../store/Authentication/AuthenticationActions";
 import { useAppDispatch } from "../../store/hooks";
 import styles from "./Register.module.css";
 
@@ -32,6 +32,7 @@ const Register = () => {
           email,
           password,
           confirmPassword,
+          role: "admin",
         })
       );
       if (response) {

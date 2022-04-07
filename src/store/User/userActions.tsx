@@ -1,11 +1,12 @@
 import axios from "axios";
-import { userActions } from "./user";
+import { userActions } from "./User";
 import { backendLink } from "../../helper/BackendLink";
+import { decodeError } from "../../helper/HelperFunctions";
 
-export const getUserAPI = (userId: string, token: string) => {
+export const getUserAPI = (token: string) => {
   return async (dispatch: any) => {
     const sendRequest = async () => {
-      return await axios.get(`${backendLink}/user/${userId}`, {
+      return await axios.get(`${backendLink}/user/`, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -14,15 +15,9 @@ export const getUserAPI = (userId: string, token: string) => {
 
     try {
       const response = await sendRequest();
-      dispatch(userActions.createUser(response.data.user));
+      dispatch(userActions.initializeUser(response.data.user));
     } catch (err: any) {
-      let errorMessage = JSON.stringify(err.response.data);
-      errorMessage = errorMessage.split("Error: ")[1];
-      errorMessage = errorMessage.split("<br>")[0];
-
-      const error = new Error(errorMessage);
-      error.statusCode = err.response.status;
-      error.message = errorMessage;
+      let error = decodeError(err);
       throw error;
     }
   };

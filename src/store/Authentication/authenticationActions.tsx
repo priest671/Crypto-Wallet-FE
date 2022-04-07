@@ -1,7 +1,7 @@
 import axios from "axios";
-import { authActions } from "./authentication";
-import {} from "../User/user";
+import { authActions } from "./Authentication";
 import { backendLink } from "../../helper/BackendLink";
+import { decodeError } from "../../helper/HelperFunctions";
 
 interface loginDataType {
   phoneNumber: string;
@@ -23,14 +23,7 @@ export const loginAPI = (loginData: loginDataType) => {
       // Validation Check.
       if (err.response.status === 422) {
         dispatch(authActions.logout());
-
-        let errorMessage = JSON.stringify(err.response.data);
-        errorMessage = errorMessage.split("Error: ")[1];
-        errorMessage = errorMessage.split("<br>")[0];
-
-        const error = new Error(errorMessage);
-        error.statusCode = err.response.status;
-        error.message = errorMessage;
+        let error = decodeError(err);
         throw error;
       }
 
@@ -38,13 +31,7 @@ export const loginAPI = (loginData: loginDataType) => {
       if (err.response.status !== 200 && err.response.status !== 201) {
         dispatch(authActions.logout());
 
-        let errorMessage = JSON.stringify(err.response.data);
-        errorMessage = errorMessage.split("Error: ")[1];
-        errorMessage = errorMessage.split("<br>")[0];
-
-        const error = new Error(errorMessage);
-        error.statusCode = err.response.status;
-        error.message = errorMessage;
+        let error = decodeError(err);
         throw error;
       }
     }
@@ -57,6 +44,7 @@ interface registerationDataType {
   email: string;
   password: string;
   confirmPassword: string;
+  role: string;
 }
 
 export const registerAPI = (registerationData: registerationDataType) => {
@@ -70,25 +58,13 @@ export const registerAPI = (registerationData: registerationDataType) => {
       return response;
     } catch (err: any) {
       if (err.response.status === 422) {
-        let errorMessage = JSON.stringify(err.response.data);
-        errorMessage = errorMessage.split("Error: ")[1];
-        errorMessage = errorMessage.split("<br>")[0];
-
-        const error = new Error(errorMessage);
-        error.statusCode = err.response.status;
-        error.message = errorMessage;
+        let error = decodeError(err);
         throw error;
       }
 
       // Authentication Check.
       if (err.response.status !== 200 && err.response.status !== 201) {
-        let errorMessage = JSON.stringify(err.response.data);
-        errorMessage = errorMessage.split("Error: ")[1];
-        errorMessage = errorMessage.split("<br>")[0];
-
-        const error = new Error(errorMessage);
-        error.statusCode = err.response.status;
-        error.message = errorMessage;
+        let error = decodeError(err);
         throw error;
       }
     }

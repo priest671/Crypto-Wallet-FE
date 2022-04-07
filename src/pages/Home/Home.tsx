@@ -10,9 +10,9 @@ const Home = () => {
       <div className={styles["wrapper"]}>
         <div className={styles["topBox"]}>
           <div className={styles["heading"]}>
-            <div className={styles["name"]}>
-              Pak Wallet
-              <span> !</span>
+            <div className={styles["name"]}>Pak Wallet</div>
+            <div className={styles["flag-picture"]}>
+              <img src="images/Flag.png" alt="IMG" />
             </div>
           </div>
           <p>

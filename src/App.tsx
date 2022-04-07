@@ -27,8 +27,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 //Redux Imports
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { getUserAPI } from "./store/User/userActions";
-import { authActions } from "./store/Authentication/authentication";
+import { getUserAPI } from "./store/User/UserActions";
+import { authActions } from "./store/Authentication/Authentication";
 
 //Pages Imports
 import Menu from "./components/UI/Menu/Menu";
@@ -67,7 +67,7 @@ const App: React.FC = () => {
       })
     );
 
-    dispatch(getUserAPI(userId, token));
+    dispatch(getUserAPI(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

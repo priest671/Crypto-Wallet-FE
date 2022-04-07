@@ -1,14 +1,15 @@
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
 import React, { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
-import { loginAPI } from "../../store/Authentication/authenticationActions";
-import { authActions } from "../../store/Authentication/authentication";
+import { loginAPI } from "../../store/Authentication/AuthenticationActions";
+import { authActions } from "../../store/Authentication/Authentication";
 
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
-import { getUserAPI } from "../../store/User/userActions";
+import { getUserAPI } from "../../store/User/UserActions";
+import { getWalletAPI } from "../../store/Wallet/WalletActions";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,7 +38,8 @@ const Login = () => {
             })
           );
 
-          //  dispatch(getUserAPI(response.data.user._id, response.data.token));
+          dispatch(getUserAPI(response.data.token));
+          dispatch(getWalletAPI(response.data.token));
 
           navigate("/");
         } catch (err: any) {

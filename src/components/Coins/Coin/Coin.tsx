@@ -5,22 +5,28 @@ import styles from "./Coin.module.css";
 interface coinProps {
   name: string | boolean;
   acronym: string;
-  quantity: number;
+  quantity?: number;
 }
 
 const Coin = (props: coinProps) => {
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
+    let quantity = 1;
+
+    if (props.quantity) {
+      quantity = props.quantity;
+    }
+
     if (props.name && props.acronym !== "PKR") {
       const url = `https://api.coinbase.com/v2/prices/${props.acronym}-PKR/buy`;
       axios.get(url).then((res) => {
-        let price = res.data.data.amount * props.quantity;
+        let price = res.data.data.amount * quantity;
         price = Number(price.toFixed(2));
         setPrice(price);
       });
     } else if (props.name && props.acronym === "PKR") {
-      setPrice(props.quantity);
+      setPrice(quantity);
     }
   }, []);
 

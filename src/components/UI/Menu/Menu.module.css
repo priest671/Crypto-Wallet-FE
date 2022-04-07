@@ -22,8 +22,7 @@ img {
   border-radius: 50%;
   height: 80px;
   width: 80px;
-  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.5),
-    -1px -1px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.5), -1px -1px 4px 0px rgba(0, 0, 0, 0.5);
   background-color: var(--primary);
 }
 
@@ -73,11 +72,13 @@ img {
   font-size: 14px;
   font-weight: 600;
   border-bottom: 1px solid var(--primary);
+  color: var(--primary);
 }
 
 .item svg {
   width: 50px;
   height: 25px;
+  /* color: var(--primary); */
 }
 
 .footer {

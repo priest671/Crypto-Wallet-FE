@@ -5,17 +5,19 @@ const initialState = {
   phoneNumber: null,
   email: null,
   password: null,
+  role: null,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    createUser(state, action) {
+    initializeUser(state, action) {
       state.name = action.payload.name;
       state.phoneNumber = action.payload.phoneNumber;
       state.email = action.payload.email;
       state.password = action.payload.password;
+      state.role = action.payload.role.name;
     },
   },
 });
