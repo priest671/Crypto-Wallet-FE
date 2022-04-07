@@ -26,6 +26,7 @@ export const getWalletAPI = (token: string) => {
 export const updateBalance = (coins: any) => {
   return async (dispatch: any) => {
     try {
+      //TODO: make this async
       let totalBalance = 0;
       coins.forEach((coin: any) => {
         if (coin.coin.acronym !== "PKR") {
