@@ -23,26 +23,39 @@ export const getWalletAPI = (token: string) => {
   };
 };
 
+const getTotalBalance = async (coins: any) => {
+  const sendRequest = async (acronym: string) => {
+    return await axios.get(`https://api.coinbase.com/v2/prices/${acronym}-PKR/buy`);
+  };
+
+  let totalBalance = 0;
+  coins.forEach(async (coin: any) => {
+    if (coin.coin.acronym !== "PKR") {
+      const response = await sendRequest(coin.coin.acronym);
+        let price = response.data.data.amount * coin.quantity;
+        price = parseFloat(price.toFixed(2));
+        totalBalance += price;
+        console.log("not PKR", totalBalance);
+      
+    } else if (coin.coin.acronym === "PKR") {
+      totalBalance += parseFloat(coin.quantity);
+      console.log("PKR", totalBalance);
+    }
+  });
+
+  return totalBalance;
+}
+
 export const updateBalance = (coins: any) => {
   return async (dispatch: any) => {
     try {
       //TODO: make this async
-      let totalBalance = 0;
-      coins.forEach((coin: any) => {
-        if (coin.coin.acronym !== "PKR") {
-          const url = `https://api.coinbase.com/v2/prices/${coin.coin.acronym}-PKR/buy`;
-          axios.get(url).then((res) => {
-            let price = res.data.data.amount * coin.quantity;
-            price = parseFloat(price.toFixed(2));
-            totalBalance += price;
-            console.log("not PKR", totalBalance);
-          });
-        } else if (coin.coin.acronym === "PKR") {
-          totalBalance += parseFloat(coin.quantity);
-          console.log("PKR", totalBalance);
-        }
-      });
 
+      let totalBalance: any;
+      totalBalance = await getTotalBalance(coins);
+
+
+     console.log("dispatching...");
       dispatch(walletActions.setBalance(totalBalance));
     } catch (err: any) {
       let error = decodeError(err);
