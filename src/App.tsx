@@ -42,6 +42,7 @@ import Transactions from "./pages/Transactions/Transactions";
 import UserSetting from "./pages/UserSetting/UserSetting";
 import Trades from "./pages/Trades/Trades";
 import Transfer from "./pages/Transfer/Transfer";
+import { getWalletAPI } from "./store/Wallet/WalletActions";
 
 setupIonicReact();
 
@@ -68,6 +69,7 @@ const App: React.FC = () => {
     );
 
     dispatch(getUserAPI(token));
+    dispatch(getWalletAPI(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
