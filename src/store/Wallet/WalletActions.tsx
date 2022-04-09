@@ -2,7 +2,6 @@ import axios from "axios";
 import { walletActions } from "./Wallet";
 import { backendLink } from "../../helper/BackendLink";
 import { decodeError } from "../../helper/HelperFunctions";
-import { useAppSelector } from "../hooks";
 
 export const getWalletAPI = (token: string) => {
   return async (dispatch: any) => {
@@ -37,12 +36,11 @@ export const getPrice = async (acronym: string) => {
   }
 };
 
-export const updateBalance = () => {
+export const updateBalance = (coins: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(walletActions.setBalance(0));
-      let myCoins = useAppSelector((state) => state.wallet.coins);
-      myCoins.forEach(async (coin: any, coinIndex: any) => {
+      coins.forEach(async (coin: any, coinIndex: any) => {
         let quantity = coin.quantity;
         let price;
         if (coin.coin.acronym !== "PKR") {

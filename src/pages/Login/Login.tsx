@@ -11,8 +11,8 @@ import Button from "../../components/UI/Button/Button";
 
 // Redux Imports
 import { getUserAPI } from "../../store/User/UserActions";
-import { getWalletAPI, updateBalance } from "../../store/Wallet/WalletActions";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getWalletAPI } from "../../store/Wallet/WalletActions";
+import { useAppDispatch } from "../../store/hooks";
 import { loginAPI } from "../../store/Authentication/AuthenticationActions";
 import { authActions } from "../../store/Authentication/Authentication";
 
@@ -48,7 +48,6 @@ const Login = () => {
 
           dispatch(getUserAPI(response.data.token));
           dispatch(getWalletAPI(response.data.token));
-          dispatch(updateBalance());
 
           navigate("/");
         } catch (err: any) {

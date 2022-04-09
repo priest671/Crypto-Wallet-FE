@@ -23,7 +23,7 @@ const Wallet = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(updateBalance());
+    dispatch(updateBalance(myCoins));
   }, [dispatch, myCoins]);
 
   return (
