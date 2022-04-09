@@ -2,6 +2,7 @@ import axios from "axios";
 import { walletActions } from "./Wallet";
 import { backendLink } from "../../helper/BackendLink";
 import { decodeError } from "../../helper/HelperFunctions";
+import { useAppSelector } from "../hooks";
 
 export const getWalletAPI = (token: string) => {
   return async (dispatch: any) => {
@@ -23,70 +24,44 @@ export const getWalletAPI = (token: string) => {
   };
 };
 
-// const getPrice = async (acronym: string) => {
-//   const sendRequest = async (acronym: string) => {
-//     return await axios.get(`https://api.coinbase.com/v2/prices/${acronym}-PKR/buy`);
-//   };
+export const getPrice = async (acronym: string) => {
+  const sendRequest = async (acronym: string) => {
+    return await axios.get(`https://api.coinbase.com/v2/prices/${acronym}-PKR/buy`);
+  };
 
-//   try {
-//     await sendRequest(acronym).then((res) => {
-//       // console.log(res.data.data.amount);
-//       return res.data.data.amount;
-//     });
-//     // let price = response.data.data.amount * coin.quantity;
-//     // price = parseFloat(price.toFixed(2));
-//     // totalBalance += price;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// export const updateBalance = (coins: any) => {
-//   return async (dispatch: any) => {
-//     try {
-//       coins.forEach(async (coin: any) => {});
-//       //TODO: make this async
-
-//       let totalBalance = 0;
-//       for (let coin of coins) {
-//         let quantity = coin.quantity;
-
-//         if (coin.coin.acronym !== "PKR") {
-//           let price: any = await getPrice(coin.acronym).then(
-
-//             price = Number(price.toFixed(2));
-//             totalBalance += price * quantity;
-
-//           );
-//         }
-
-//         let price = await getPrice(coin.coin.acronym).then((res) => {
-//           console.log(price);
-//           console.log("quantity", quantity);
-//         });
-//       }
-//       await getPrice(coins).then((res) => {
-//         console.log("res 2:", res);
-//       });
-
-//       console.log("dispatching...");
-//       dispatch(walletActions.setBalance(totalBalance));
-//     } catch (err: any) {
-//       let error = decodeError(err);
-//       throw error;
-//     }
-//   };
-// };
+  try {
+    const response = await sendRequest(acronym);
+    return response.data.data.amount;
+  } catch (err: any) {
+    console.log(err);
+  }
+};
 
 export const updateBalance = (coins: any) => {
   return async (dispatch: any) => {
     try {
-      console.log("update Balance...");
-      console.log(coins);
-      // dispatch(walletActions.setBalance(totalBalance));
+      dispatch(walletActions.setBalance(0));
+      coins.forEach(async (coin: any, coinIndex: any) => {
+        let quantity = coin.quantity;
+        let price;
+        if (coin.coin.acronym !== "PKR") {
+          price = await getPrice(coin.coin.acronym);
+          price = price * quantity;
+        } else {
+          price = parseFloat(quantity);
+        }
+        price = parseFloat(price.toFixed(2));
+
+        dispatch(walletActions.appendBalance(price));
+      });
     } catch (err: any) {
-      let error = decodeError(err);
-      throw error;
+      console.log(err);
     }
+  };
+};
+
+export const resetWallet = () => {
+  return async (dispatch: any) => {
+    dispatch(walletActions.resetWallet());
   };
 };

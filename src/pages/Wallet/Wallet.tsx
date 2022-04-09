@@ -16,7 +16,7 @@ const Wallet = () => {
 
   useEffect(() => {
     dispatch(updateBalance(myCoins));
-  }, []);
+  }, [dispatch, myCoins]);
 
   return (
     <IonPage id="main">

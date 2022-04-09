@@ -16,6 +16,8 @@ import Button from "../Button/Button";
 import { logout } from "../../../store/Authentication/AuthenticationActions";
 import { useNavigate } from "react-router-dom";
 
+import { resetWallet } from "../../../store/Wallet/WalletActions";
+
 const Menu: React.FC = () => {
   const [disabled, setDisabled] = useState(false);
   const [displayAdmin, setDisplayAdmin] = useState(false);
@@ -36,6 +38,7 @@ const Menu: React.FC = () => {
   const logoutHandler = () => {
     setDisabled(true);
     setTimeout(() => setDisabled(false), 100);
+    dispatch(resetWallet());
     dispatch(logout());
     navigate("/");
   };

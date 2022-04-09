@@ -9,7 +9,7 @@ import Button from "../../components/UI/Button/Button";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { getUserAPI } from "../../store/User/UserActions";
-import { getWalletAPI } from "../../store/Wallet/WalletActions";
+import { getWalletAPI, updateBalance } from "../../store/Wallet/WalletActions";
 
 const Login = () => {
   const navigate = useNavigate();
