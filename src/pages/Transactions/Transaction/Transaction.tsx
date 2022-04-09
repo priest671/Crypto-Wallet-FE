@@ -1,4 +1,13 @@
+// Ionic Imports
+
+// React Imports
 import React from "react";
+
+// Redux Imports
+
+// Component Imports
+
+// Styles / Icons Imports
 import styles from "./Transaction.module.css";
 import { MdCallReceived, MdOutlineCallMade } from "react-icons/md";
 
@@ -30,9 +39,7 @@ const Transaction = (props: TransactionsProps) => {
 
   return (
     <div className={styles["transaction-wrapper"]}>
-      <div className={`${styles["item"]} ${styles["type"]}`}>
-        {transactionType}
-      </div>
+      <div className={`${styles["item"]} ${styles["type"]}`}>{transactionType}</div>
 
       <div className={`${styles["item"]} ${styles["coin"]}`}>
         <div className={styles["coin-picture"]}>

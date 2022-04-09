@@ -37,11 +37,12 @@ export const getPrice = async (acronym: string) => {
   }
 };
 
-export const updateBalance = (coins: any) => {
+export const updateBalance = () => {
   return async (dispatch: any) => {
     try {
       dispatch(walletActions.setBalance(0));
-      coins.forEach(async (coin: any, coinIndex: any) => {
+      let myCoins = useAppSelector((state) => state.wallet.coins);
+      myCoins.forEach(async (coin: any, coinIndex: any) => {
         let quantity = coin.quantity;
         let price;
         if (coin.coin.acronym !== "PKR") {
@@ -51,7 +52,6 @@ export const updateBalance = (coins: any) => {
           price = parseFloat(quantity);
         }
         price = parseFloat(price.toFixed(2));
-
         dispatch(walletActions.appendBalance(price));
       });
     } catch (err: any) {

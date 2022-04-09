@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Coin.module.css";
-import { useAppSelector } from "../../../store/hooks";
 
 interface coinProps {
   name: string | boolean;

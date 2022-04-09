@@ -1,5 +1,10 @@
+// Ionic Imports
 import { IonButtons, IonMenuButton, IonMenuToggle } from "@ionic/react";
+
+// React Imports
 import React from "react";
+
+// Styles / Icons Imports
 import styles from "./Header.module.css";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";

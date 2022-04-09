@@ -1,3 +1,4 @@
+// Ionic Imports
 import {
   IonContent,
   IonInput,
@@ -7,10 +8,20 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
+
+// React Imports
 import React from "react";
+
+// Component Imports
 import Header from "../../components/Header/Header";
-import styles from "./Trades.module.css";
 import Button from "../../components/UI/Button/Button";
+
+// Redux Imports
+
+// Styles / Icons Imports
+import styles from "./Trades.module.css";
+
+//TODO: To be removed
 import { hasKey } from "../../helper/HelperFunctions";
 import allCoins from "../../data/allCoins.json";
 import myCoins from "../../data/dummyCoins.json";
@@ -77,8 +88,7 @@ const Trades = () => {
                 <IonSelect
                   value={buyCurrency}
                   placeholder="Select Currency"
-                  onIonChange={(e) => setBuyCurrency(e.detail.value)}
-                >
+                  onIonChange={(e) => setBuyCurrency(e.detail.value)}>
                   {buyOptions}
                 </IonSelect>
               </IonItem>
@@ -90,8 +100,7 @@ const Trades = () => {
                 <IonInput
                   type="number"
                   value={buyAmount}
-                  onIonChange={(e) => setBuyAmount(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setBuyAmount(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -117,8 +126,7 @@ const Trades = () => {
                 <IonSelect
                   value={sellCurrency}
                   placeholder="Select Currency"
-                  onIonChange={(e) => setSellCurrency(e.detail.value)}
-                >
+                  onIonChange={(e) => setSellCurrency(e.detail.value)}>
                   {sellOptions}
                 </IonSelect>
               </IonItem>
@@ -130,8 +138,7 @@ const Trades = () => {
                 <IonInput
                   type="number"
                   value={sellAmount}
-                  onIonChange={(e) => setSellAmount(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setSellAmount(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 

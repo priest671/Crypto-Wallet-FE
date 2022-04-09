@@ -1,8 +1,15 @@
+// React Imports
 import React from "react";
+
+// Ionic Imports
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
+
+// Component Imports
 import Header from "../../components/Header/Header";
-import styles from "./UserSetting.module.css";
 import Button from "../../components/UI/Button/Button";
+
+// Styles Imports
+import styles from "./UserSetting.module.css";
 
 const UserSetting = () => {
   const [name, setName] = React.useState<string>("Hiba Razzaq");
@@ -35,8 +42,7 @@ const UserSetting = () => {
                 <IonInput
                   type="text"
                   value={name}
-                  onIonChange={(e) => setName(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setName(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -46,8 +52,7 @@ const UserSetting = () => {
                 <IonInput
                   type="number"
                   value={phone}
-                  onIonChange={(e) => setPhone(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setPhone(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -57,8 +62,7 @@ const UserSetting = () => {
                 <IonInput
                   type="email"
                   value={email}
-                  onIonChange={(e) => setEmail(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setEmail(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -68,8 +72,7 @@ const UserSetting = () => {
                 <IonInput
                   type="password"
                   value={password}
-                  onIonChange={(e) => setPassword(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setPassword(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -79,8 +82,7 @@ const UserSetting = () => {
                 <IonInput
                   type="password"
                   value={confirmPassword}
-                  onIonChange={(e) => setConfirmPassword(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setConfirmPassword(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 

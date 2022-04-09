@@ -1,6 +1,13 @@
+// Ionic Imports
+
+// React Imports
 import React, { Fragment } from "react";
+
+// Component Imports
 import Anchor from "../../components/UI/Anchor/Anchor";
 import Button from "../../components/UI/Button/Button";
+
+// Styles / Icons Imports
 import styles from "./Home.module.css";
 
 const Home = () => {

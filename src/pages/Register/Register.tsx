@@ -1,11 +1,19 @@
+// Ionic Imports
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
 
+// React Imports
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header/Header";
-import Button from "../../components/UI/Button/Button";
+
+// Redux Imports
 import { registerAPI } from "../../store/Authentication/AuthenticationActions";
 import { useAppDispatch } from "../../store/hooks";
+
+// Component Imports
+import Header from "../../components/Header/Header";
+import Button from "../../components/UI/Button/Button";
+
+// Styles / Icons Imports
 import styles from "./Register.module.css";
 
 const Register = () => {

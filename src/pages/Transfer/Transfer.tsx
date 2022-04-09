@@ -1,3 +1,4 @@
+// Ionic Imports
 import {
   IonContent,
   IonInput,
@@ -7,10 +8,20 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
+
+// React Imports
 import React from "react";
+
+// Redux Imports
+
+// Component Imports
 import Header from "../../components/Header/Header";
-import styles from "./Transfer.module.css";
 import Button from "../../components/UI/Button/Button";
+
+// Styles Imports
+import styles from "./Transfer.module.css";
+
+//TODO: To be removed
 import { hasKey } from "../../helper/HelperFunctions";
 import myCoins from "../../data/dummyCoins.json";
 
@@ -55,8 +66,7 @@ const Transfer = () => {
                 <IonInput
                   type="text"
                   value={walletAddress}
-                  onIonChange={(e) => setWalletAddress(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setWalletAddress(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -66,8 +76,7 @@ const Transfer = () => {
                 <IonSelect
                   value={currency}
                   placeholder="Select Currency"
-                  onIonChange={(e) => setCurrency(e.detail.value)}
-                >
+                  onIonChange={(e) => setCurrency(e.detail.value)}>
                   {options}
                 </IonSelect>
               </IonItem>
@@ -79,8 +88,7 @@ const Transfer = () => {
                 <IonInput
                   type="number"
                   value={amount}
-                  onIonChange={(e) => setAmount(e.detail.value!)}
-                ></IonInput>
+                  onIonChange={(e) => setAmount(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 

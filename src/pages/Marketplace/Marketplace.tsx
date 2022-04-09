@@ -1,12 +1,20 @@
+// Ionic Imports
 import { IonContent, IonPage } from "@ionic/react";
+
+// React Imports
 import React, { useEffect, useState } from "react";
-import Coins from "../../components/Coins/Coins";
-import Header from "../../components/Header/Header";
-import styles from "./Marketplace.module.css";
-import allCoins from "../../data/allCoins.json";
+
+// Helper Imports
 import axios from "axios";
 import { backendLink } from "../../helper/BackendLink";
 import { decodeError } from "../../helper/HelperFunctions";
+
+// Component Imports
+import Coins from "../../components/Coins/Coins";
+import Header from "../../components/Header/Header";
+
+// Styles / Icons Imports
+import styles from "./Marketplace.module.css";
 
 const Marketplace = () => {
   let token = localStorage.getItem("token");

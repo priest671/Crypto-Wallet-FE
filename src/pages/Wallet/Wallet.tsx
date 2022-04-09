@@ -1,9 +1,17 @@
+// Ionic Imports
 import { IonContent, IonPage } from "@ionic/react";
+
+// React Imports
 import React, { useEffect } from "react";
+
+// Component Imports
 import Coins from "../../components/Coins/Coins";
 import Header from "../../components/Header/Header";
+
+// Styles Imports
 import styles from "./Wallet.module.css";
-// import myCoins from "../../data/dummyCoins.json";
+
+// Redux Imports
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { updateBalance } from "../../store/Wallet/WalletActions";
 
@@ -15,7 +23,7 @@ const Wallet = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(updateBalance(myCoins));
+    dispatch(updateBalance());
   }, [dispatch, myCoins]);
 
   return (

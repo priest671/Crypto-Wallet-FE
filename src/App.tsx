@@ -17,20 +17,21 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
-//Ionic Imports
+// Ionic Imports
 import { IonApp, setupIonicReact } from "@ionic/react";
 
-//React Imports
+// React Imports
 import "./theme/variables.css";
 import { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-//Redux Imports
+// Redux Imports
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { getUserAPI } from "./store/User/UserActions";
 import { authActions } from "./store/Authentication/Authentication";
+import { getWalletAPI } from "./store/Wallet/WalletActions";
 
-//Pages Imports
+// Pages Imports
 import Menu from "./components/UI/Menu/Menu";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -42,7 +43,6 @@ import Transactions from "./pages/Transactions/Transactions";
 import UserSetting from "./pages/UserSetting/UserSetting";
 import Trades from "./pages/Trades/Trades";
 import Transfer from "./pages/Transfer/Transfer";
-import { getWalletAPI } from "./store/Wallet/WalletActions";
 
 setupIonicReact();
 

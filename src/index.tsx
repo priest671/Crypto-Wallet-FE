@@ -1,8 +1,15 @@
+// React Imports
 import React from "react";
 import ReactDOM from "react-dom";
+
+// Redux Imports
 import { Provider } from "react-redux";
-import App from "./App";
 import store from "./store/store";
+
+// Pages Imports
+import App from "./App";
+
+// Testing Imports
 // import * as serviceWorkerRegistration from "./testing/serviceWorkerRegistration";
 // import reportWebVitals from "./testing/reportWebVitals";
 
