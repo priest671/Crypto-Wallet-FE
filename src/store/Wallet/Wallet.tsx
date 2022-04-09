@@ -14,6 +14,9 @@ const walletSlice = createSlice({
       state.address = action.payload.address;
       state.coins = action.payload.coins;
     },
+    setCoins(state, action) {
+      state.coins = action.payload;
+    },
     setBalance(state, action) {
       state.balance = action.payload;
     },

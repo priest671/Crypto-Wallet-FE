@@ -58,6 +58,16 @@ export const updateBalance = (coins: any) => {
   };
 };
 
+export const updateCoins = (coins: any) => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(walletActions.setCoins(coins));
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
+};
+
 export const resetWallet = () => {
   return async (dispatch: any) => {
     dispatch(walletActions.resetWallet());
