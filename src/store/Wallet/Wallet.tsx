@@ -1,10 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface prices {
+  title: string;
+  label: string;
+  value: number;
+  // color: string;
+}
+
+interface IWallet {
+  address: string | null;
+  balance: number | null;
+  coins: never[];
+  prices: Array<prices>;
+}
+
 const initialState = {
   address: null,
   balance: null,
   coins: [],
-};
+  prices: [],
+} as unknown as IWallet;
 
 const walletSlice = createSlice({
   name: "wallet",
@@ -27,6 +42,13 @@ const walletSlice = createSlice({
       state.address = null;
       state.balance = null;
       state.coins = [];
+      state.prices = [];
+    },
+    setCoinPrices(state, action) {
+      state.prices = action.payload;
+    },
+    appendCoinPrices(state, action) {
+      state.prices.push(action.payload);
     },
   },
 });

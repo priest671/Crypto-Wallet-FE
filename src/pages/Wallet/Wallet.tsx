@@ -7,18 +7,21 @@ import React, { useEffect } from "react";
 // Component Imports
 import Coins from "../../components/Coins/Coins";
 import Header from "../../components/Header/Header";
+import PieChart from "../../components/PieChart/Pie";
 
 // Styles Imports
 import styles from "./Wallet.module.css";
 
 // Redux Imports
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { updateBalance } from "../../store/Wallet/WalletActions";
+import { getWalletAPI, updateBalance } from "../../store/Wallet/WalletActions";
 
 const Wallet = () => {
   let walletAddress = useAppSelector((state) => state.wallet.address);
   let walletBalance = useAppSelector((state) => state.wallet.balance);
   let myCoins = useAppSelector((state) => state.wallet.coins);
+  let coinPrices = useAppSelector((state) => state.wallet.prices);
+  // console.log(coinPrices);
 
   const dispatch = useAppDispatch();
 
@@ -39,7 +42,13 @@ const Wallet = () => {
           </div>
 
           <div className={styles["middle-box"]}>
-            <h3>Balance: {walletBalance} PKR</h3>
+            <p>
+              Balance (RS): <span>{walletBalance}</span>
+            </p>
+          </div>
+
+          <div className={styles["pie-chart"]}>
+            <PieChart data={coinPrices} />
           </div>
 
           <div className={styles["coin-list"]}>

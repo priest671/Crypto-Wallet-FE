@@ -40,6 +40,7 @@ export const updateBalance = (coins: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(walletActions.setBalance(0));
+      dispatch(walletActions.setCoinPrices([]));
       coins.forEach(async (coin: any, coinIndex: any) => {
         let quantity = coin.quantity;
         let price;
@@ -51,6 +52,13 @@ export const updateBalance = (coins: any) => {
         }
         price = parseFloat(price.toFixed(2));
         dispatch(walletActions.appendBalance(price));
+        dispatch(
+          walletActions.appendCoinPrices({
+            id: coin.coin.acronym,
+            label: coin.coin.name,
+            value: price,
+          })
+        );
       });
     } catch (err: any) {
       console.log(err);

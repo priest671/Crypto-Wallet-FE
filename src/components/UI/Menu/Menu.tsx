@@ -38,8 +38,8 @@ const Menu: React.FC = () => {
   const logoutHandler = () => {
     setDisabled(true);
     setTimeout(() => setDisabled(false), 100);
-    dispatch(resetWallet());
     dispatch(logout());
+    dispatch(resetWallet());
     navigate("/");
   };
 
