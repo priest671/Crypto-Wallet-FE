@@ -22,3 +22,23 @@ export const getUserAPI = (token: string) => {
     }
   };
 };
+
+export const getAllUsersAPI = (token: string, role: string) => {
+  return async (dispatch: any) => {
+    const sendRequest = async () => {
+      return await axios.get(`${backendLink}/user/getAllUsers`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+    };
+
+    try {
+      const response = await sendRequest();
+      return response.data.users;
+    } catch (err: any) {
+      let error = decodeError(err);
+      throw error;
+    }
+  };
+};

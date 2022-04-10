@@ -9,7 +9,7 @@ interface prices {
 interface IWallet {
   address: string | null;
   balance: number | null;
-  coins: never[];
+  coins: any;
   prices: Array<prices>;
 }
 

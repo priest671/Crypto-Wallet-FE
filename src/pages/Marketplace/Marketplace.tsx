@@ -4,43 +4,35 @@ import { IonContent, IonPage } from "@ionic/react";
 // React Imports
 import React, { useEffect, useState } from "react";
 
-// Helper Imports
-import axios from "axios";
-import { backendLink } from "../../helper/BackendLink";
-import { decodeError } from "../../helper/HelperFunctions";
-
 // Component Imports
 import Coins from "../../components/Coins/Coins";
 import Header from "../../components/Header/Header";
 
 // Styles / Icons Imports
 import styles from "./Marketplace.module.css";
+import { useAppDispatch } from "../../store/hooks";
+import { getCoinsAPI } from "../../store/Coin/CoinActions";
 
 const Marketplace = () => {
-  let token = localStorage.getItem("token");
   const [coins, setCoins] = useState([]);
 
-  const sendRequest = async () => {
-    return await axios.get(`${backendLink}/coin`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-  };
-
-  const getCoins = async () => {
-    try {
-      const response = await sendRequest();
-      let filteredCoins = response.data.coins.filter((coin: any) => coin.acronym !== "PKR");
-      setCoins(filteredCoins);
-    } catch (err) {
-      let error = decodeError(err);
-      throw error;
-    }
-  };
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getCoins();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+
+    try {
+      let response = dispatch(getCoinsAPI(token));
+      response.then((res: any) => {
+        setCoins(res);
+      });
+    } catch (err: any) {
+      console.log(err.statusCode);
+      console.log(err.message);
+    }
   }, []);
 
   return (

@@ -134,7 +134,7 @@ const Menu: React.FC = () => {
                 setTimeout(() => setDisabled(false), 100);
               }}
               className={styles["item"]}>
-              <Anchor path="/usersetting">Admin</Anchor>
+              <Anchor path="/admin">Admin</Anchor>
               <MdAdminPanelSettings />
             </div>
           )}

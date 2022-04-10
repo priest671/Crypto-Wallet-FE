@@ -17,6 +17,7 @@ import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
 
 // Redux Imports
+import { useAppSelector } from "../../store/hooks";
 
 // Styles / Icons Imports
 import styles from "./Trades.module.css";
@@ -33,31 +34,29 @@ const Trades = () => {
   const [sellCurrency, setSellCurrency] = React.useState<string>();
   const [sellAmount, setSellAmount] = React.useState<string>();
 
-  const buyOptions = Object.keys(allCoins).map((key, index) => {
-    if (hasKey(allCoins, key)) {
-      return (
-        <IonSelectOption key={index} value={allCoins[key].acronym}>
-          {allCoins[key].name}
-        </IonSelectOption>
-      );
-    } else {
-      return null;
-    }
+  const coins = useAppSelector((state) => state.wallet.coins);
+
+  const sellOptions = coins.map((coin: any) => {
+    return (
+      <IonSelectOption key={coin.coin._id} value={coin.coin.acronym}>
+        {coin.coin.name}: {coin.quantity}
+      </IonSelectOption>
+    );
   });
 
-  const sellOptions = Object.keys(myCoins).map((key, index) => {
-    if (hasKey(myCoins, key)) {
-      return (
-        <IonSelectOption key={index} value={myCoins[key].acronym}>
-          {myCoins[key].name}
-          <span> </span>
-          {myCoins[key].quantity}
-        </IonSelectOption>
-      );
-    } else {
-      return null;
-    }
-  });
+  // const sellOptions = Object.keys(myCoins).map((key, index) => {
+  //   if (hasKey(myCoins, key)) {
+  //     return (
+  //       <IonSelectOption key={index} value={myCoins[key].acronym}>
+  //         {myCoins[key].name}
+  //         <span> </span>
+  //         {myCoins[key].quantity}
+  //       </IonSelectOption>
+  //     );
+  //   } else {
+  //     return null;
+  //   }
+  // });
 
   const buyFormSubmitHandler = (e: any) => {
     e.preventDefault();
@@ -89,7 +88,7 @@ const Trades = () => {
                   value={buyCurrency}
                   placeholder="Select Currency"
                   onIonChange={(e) => setBuyCurrency(e.detail.value)}>
-                  {buyOptions}
+                  {/* {buyOptions} */}
                 </IonSelect>
               </IonItem>
             </div>

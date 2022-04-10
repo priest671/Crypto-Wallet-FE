@@ -14,14 +14,13 @@ import styles from "./Wallet.module.css";
 
 // Redux Imports
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { getWalletAPI, updateBalance } from "../../store/Wallet/WalletActions";
+import { updateBalance } from "../../store/Wallet/WalletActions";
 
 const Wallet = () => {
   let walletAddress = useAppSelector((state) => state.wallet.address);
   let walletBalance = useAppSelector((state) => state.wallet.balance);
   let myCoins = useAppSelector((state) => state.wallet.coins);
   let coinPrices = useAppSelector((state) => state.wallet.prices);
-  // console.log(coinPrices);
 
   const dispatch = useAppDispatch();
 

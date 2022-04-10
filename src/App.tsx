@@ -43,6 +43,7 @@ import Transactions from "./pages/Transactions/Transactions";
 import UserSetting from "./pages/UserSetting/UserSetting";
 import Trades from "./pages/Trades/Trades";
 import Transfer from "./pages/Transfer/Transfer";
+import Admin from "./pages/Admin/Admin";
 
 setupIonicReact();
 
@@ -104,6 +105,7 @@ const App: React.FC = () => {
           <Route path="/trades" element={<Trades />} />
           <Route path="/usersetting" element={<UserSetting />} />
           <Route path="/transfer" element={<Transfer />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </IonApp>

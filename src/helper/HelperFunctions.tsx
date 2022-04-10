@@ -6,7 +6,7 @@ export const decodeError = (err: any) => {
   let errorMessage = JSON.stringify(err.response.data);
   errorMessage = errorMessage.split("Error: ")[1];
   errorMessage = errorMessage.split("<br>")[0];
-  const error = new Error(errorMessage);
+  let error = new Error(errorMessage);
   error.statusCode = err.response.status;
   error.message = errorMessage;
   return error;
