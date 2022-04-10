@@ -4,7 +4,6 @@ interface prices {
   title: string;
   label: string;
   value: number;
-  // color: string;
 }
 
 interface IWallet {
