@@ -33,6 +33,7 @@ const Marketplace = () => {
       console.log(err.statusCode);
       console.log(err.message);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

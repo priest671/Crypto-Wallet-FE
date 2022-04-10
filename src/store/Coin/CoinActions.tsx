@@ -1,6 +1,7 @@
 import axios from "axios";
 import { backendLink } from "../../helper/BackendLink";
 import { decodeError } from "../../helper/HelperFunctions";
+import { walletActions } from "../Wallet/Wallet";
 
 export const createCoinAPI = (token: string, coinName: string, coinAcroynm: string) => {
   return async (dispatch: any) => {
@@ -46,7 +47,7 @@ export const updateCoinAPI = (token: string, coinName: string, coinAcroynm: stri
     };
     try {
       const response = await sendRequest();
-      console.log(response);
+      dispatch(walletActions.setCoins(response.data.coins));
     } catch (err: any) {
       let error = decodeError(err);
       throw error;

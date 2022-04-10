@@ -10,57 +10,80 @@ import {
 } from "@ionic/react";
 
 // React Imports
-import React from "react";
+import React, { useEffect } from "react";
 
 // Component Imports
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
 
 // Redux Imports
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getCoinsAPI } from "../../store/Coin/CoinActions";
+import { buyCoinAPI, sellCoinAPI } from "../../store/Wallet/WalletActions";
 
 // Styles / Icons Imports
 import styles from "./Trades.module.css";
 
-//TODO: To be removed
-import { hasKey } from "../../helper/HelperFunctions";
-import allCoins from "../../data/allCoins.json";
-import myCoins from "../../data/dummyCoins.json";
-
 const Trades = () => {
   const [buyCurrency, setBuyCurrency] = React.useState<string>();
   const [buyAmount, setBuyAmount] = React.useState<string>();
-
   const [sellCurrency, setSellCurrency] = React.useState<string>();
   const [sellAmount, setSellAmount] = React.useState<string>();
+  const [allCoins, setAllCoins] = React.useState<any>();
 
-  const coins = useAppSelector((state) => state.wallet.coins);
+  const token = localStorage.getItem("token");
+  const userCoins = useAppSelector((state) => state.wallet.coins);
+  const dispatch = useAppDispatch();
+  let buyOptions;
+  let sellOptions;
 
-  const sellOptions = coins.map((coin: any) => {
-    return (
-      <IonSelectOption key={coin.coin._id} value={coin.coin.acronym}>
-        {coin.coin.name}: {coin.quantity}
-      </IonSelectOption>
-    );
-  });
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
 
-  // const sellOptions = Object.keys(myCoins).map((key, index) => {
-  //   if (hasKey(myCoins, key)) {
-  //     return (
-  //       <IonSelectOption key={index} value={myCoins[key].acronym}>
-  //         {myCoins[key].name}
-  //         <span> </span>
-  //         {myCoins[key].quantity}
-  //       </IonSelectOption>
-  //     );
-  //   } else {
-  //     return null;
-  //   }
-  // });
+    try {
+      let response = dispatch(getCoinsAPI(token));
+      response.then((res: any) => {
+        setAllCoins(res);
+      });
+    } catch (err: any) {
+      console.log(err.statusCode);
+      console.log(err.message);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (userCoins) {
+    sellOptions = userCoins.map((coin: any) => {
+      return (
+        <IonSelectOption key={coin.coin._id} value={coin.coin.acronym}>
+          {coin.coin.name}: {coin.quantity}
+        </IonSelectOption>
+      );
+    });
+  }
+
+  if (allCoins) {
+    buyOptions = allCoins.map((coin: any) => {
+      return (
+        <IonSelectOption key={coin._id} value={coin.acronym}>
+          {coin.name}
+        </IonSelectOption>
+      );
+    });
+  }
 
   const buyFormSubmitHandler = (e: any) => {
     e.preventDefault();
+
+    if (!token) {
+      return;
+    }
+
     console.log(buyCurrency, buyAmount);
+
+    dispatch(buyCoinAPI(token, buyCurrency, buyAmount));
   };
 
   const sellFormSubmitHandler = (e: any) => {
@@ -88,7 +111,7 @@ const Trades = () => {
                   value={buyCurrency}
                   placeholder="Select Currency"
                   onIonChange={(e) => setBuyCurrency(e.detail.value)}>
-                  {/* {buyOptions} */}
+                  {buyOptions}
                 </IonSelect>
               </IonItem>
             </div>

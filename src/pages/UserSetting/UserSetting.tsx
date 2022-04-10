@@ -1,5 +1,5 @@
 // React Imports
-import React from "react";
+import React, { useEffect } from "react";
 
 // Ionic Imports
 import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
@@ -10,17 +10,34 @@ import Button from "../../components/UI/Button/Button";
 
 // Styles Imports
 import styles from "./UserSetting.module.css";
+import { useAppSelector } from "../../store/hooks";
 
 const UserSetting = () => {
-  const [name, setName] = React.useState<string>("Hiba Razzaq");
-  const [phone, setPhone] = React.useState<string>("03371234567");
-  const [email, setEmail] = React.useState<string>("HibaRazzaq@gmail.com");
+  const [newName, setNewName] = React.useState<string>();
+  const [newPhoneNumber, setNewPhoneNumber] = React.useState<string>();
+  const [newEmail, setNewEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
   const [confirmPassword, setConfirmPassword] = React.useState<string>();
 
+  let name = useAppSelector((state) => state.user.name);
+  let phoneNumber = useAppSelector((state) => state.user.phoneNumber);
+  let email = useAppSelector((state) => state.user.email);
+
+  useEffect(() => {
+    if (name) {
+      setNewName(name);
+    }
+    if (phoneNumber) {
+      setNewPhoneNumber(phoneNumber);
+    }
+    if (email) {
+      setNewEmail(email);
+    }
+  }, [email, name, phoneNumber]);
+
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(name, phone, email, password, confirmPassword);
+    console.log(newName, newPhoneNumber, newEmail, password, confirmPassword);
   };
 
   return (
@@ -41,8 +58,8 @@ const UserSetting = () => {
                 <IonLabel position="floating">Full Name</IonLabel>
                 <IonInput
                   type="text"
-                  value={name}
-                  onIonChange={(e) => setName(e.detail.value!)}></IonInput>
+                  value={newName}
+                  onIonChange={(e) => setNewName(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -51,8 +68,8 @@ const UserSetting = () => {
                 <IonLabel position="floating">Phone Number</IonLabel>
                 <IonInput
                   type="number"
-                  value={phone}
-                  onIonChange={(e) => setPhone(e.detail.value!)}></IonInput>
+                  value={newPhoneNumber}
+                  onIonChange={(e) => setNewPhoneNumber(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -61,8 +78,8 @@ const UserSetting = () => {
                 <IonLabel position="floating">Email</IonLabel>
                 <IonInput
                   type="email"
-                  value={email}
-                  onIonChange={(e) => setEmail(e.detail.value!)}></IonInput>
+                  value={newEmail}
+                  onIonChange={(e) => setNewEmail(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
