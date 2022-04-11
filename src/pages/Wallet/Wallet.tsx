@@ -24,14 +24,6 @@ const Wallet = () => {
 
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     return;
-  //   }
-  //   dispatch(getWalletAPI(token));
-  // }, [dispatch]);
-
   useEffect(() => {
     dispatch(updateBalance(myCoins));
   }, [dispatch, myCoins]);
@@ -50,7 +42,7 @@ const Wallet = () => {
 
           <div className={styles["middle-box"]}>
             <p>
-              Balance (RS): <span>{walletBalance}</span>
+              Balance (RS): <span>{walletBalance?.toFixed(2)}</span>
             </p>
           </div>
 

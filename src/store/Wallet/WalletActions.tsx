@@ -42,15 +42,15 @@ export const updateBalance = (coins: any) => {
       dispatch(walletActions.setBalance(0));
       dispatch(walletActions.setCoinPrices([]));
       coins.forEach(async (coin: any, coinIndex: any) => {
-        let quantity = coin.quantity;
+        let quantity = Number(coin.quantity);
         let price;
         if (coin.coin.acronym !== "PKR") {
           price = await getPrice(coin.coin.acronym);
           price = price * quantity;
         } else {
-          price = parseFloat(quantity);
+          price = quantity;
         }
-        price = parseFloat(price.toFixed(2));
+        price = Number(price.toFixed(2));
         dispatch(walletActions.appendBalance(price));
         dispatch(
           walletActions.appendCoinPrices({
@@ -121,13 +121,56 @@ export const sellCoinAPI = (token: string, sellCurrency: string, sellAmount: str
 
     try {
       let price = await getPrice(sellCurrency);
-      let quantity = parseFloat(sellAmount) / price;
-      quantity = parseFloat(quantity.toFixed(6));
+      let quantity = Number(sellAmount) / price;
+      quantity = Number(quantity.toFixed(6));
 
       let response = await sendRequest(quantity.toString());
 
       dispatch(walletActions.setCoins(response.data.wallet.coins));
 
+      console.log(response);
+    } catch (err: any) {
+      let error = decodeError(err);
+      throw error;
+    }
+  };
+};
+
+export const sendCoinAPI = (
+  token: string,
+  currency: string,
+  amount: string,
+  terminal: string
+) => {
+  return async (dispatch: any) => {
+    const sendRequest = async (quantity: string) => {
+      return await axios.put(
+        `${backendLink}/wallet/send`,
+        {
+          acronym: currency,
+          quantity,
+          type: "send",
+          terminal,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    };
+
+    try {
+      let quantity;
+      if (currency === "PKR") {
+        quantity = Number(amount);
+      } else {
+        let price = await getPrice(currency);
+        quantity = Number(amount) / price;
+        quantity = Number(quantity.toFixed(6));
+      }
+      let response = await sendRequest(quantity.toString());
+      dispatch(walletActions.setCoins(response.data.wallet.coins));
       console.log(response);
     } catch (err: any) {
       let error = decodeError(err);

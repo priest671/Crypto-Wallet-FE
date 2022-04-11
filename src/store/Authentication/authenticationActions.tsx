@@ -21,19 +21,9 @@ export const loginAPI = (loginData: loginDataType) => {
       return response;
     } catch (err: any) {
       // Validation Check.
-      if (err.response.status === 422) {
-        dispatch(authActions.logout());
-        let error = decodeError(err);
-        throw error;
-      }
-
-      // Authentication Check.
-      if (err.response.status !== 200 && err.response.status !== 201) {
-        dispatch(authActions.logout());
-
-        let error = decodeError(err);
-        throw error;
-      }
+      dispatch(authActions.logout());
+      let error = decodeError(err);
+      throw error;
     }
   };
 };

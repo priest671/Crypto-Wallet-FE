@@ -33,7 +33,7 @@
 }
 
 .coin {
-  width: 25%;
+  width: 35%;
   text-align: center;
   padding-left: 10px;
 }
@@ -54,19 +54,21 @@
 
 .coin .coin-name {
   text-align: left;
-  justify-self: flex-start;
-  text-justify: flex-start;
+  justify-self: center;
+  text-justify: center;
   padding-left: 5px;
-  width: 50px;
+  width: 100px;
 }
 
 .quantity {
-  width: 30%;
+  width: 25%;
+  font-size: 11px;
+  color: var(--example-label);
 }
 
 .terminal {
-  width: 30%;
-  justify-content: flex-end;
+  width: 25%;
+  justify-content: center;
 
   /*. Clip Text (show in modal) */
   overflow: clip;

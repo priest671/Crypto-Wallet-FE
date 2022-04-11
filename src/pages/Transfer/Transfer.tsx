@@ -13,6 +13,7 @@ import {
 import React from "react";
 
 // Redux Imports
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 // Component Imports
 import Header from "../../components/Header/Header";
@@ -20,31 +21,48 @@ import Button from "../../components/UI/Button/Button";
 
 // Styles Imports
 import styles from "./Transfer.module.css";
-
-//TODO: To be removed
-import { hasKey } from "../../helper/HelperFunctions";
-import myCoins from "../../data/dummyCoins.json";
+import { sendCoinAPI } from "../../store/Wallet/WalletActions";
 
 const Transfer = () => {
   const [walletAddress, setWalletAddress] = React.useState<string>();
-  const [amount, setAmount] = React.useState<string>();
+  const [quantity, setQuantity] = React.useState<string>();
   const [currency, setCurrency] = React.useState<string>();
 
-  const options = Object.keys(myCoins).map((key, index) => {
-    if (hasKey(myCoins, key)) {
+  const dispatch = useAppDispatch();
+  const coinPrices = useAppSelector((state) => state.wallet.prices);
+  const phoneNumber = useAppSelector((state) => state.user.phoneNumber);
+
+  const token = localStorage.getItem("token");
+  let options;
+
+  if (coinPrices) {
+    options = coinPrices.map((coin: any) => {
       return (
-        <IonSelectOption key={index} value={myCoins[key].acronym}>
-          {myCoins[key].name}
+        <IonSelectOption key={coin.id} value={coin.id}>
+          {coin.label}: {coin.value}
         </IonSelectOption>
       );
-    } else {
-      return null;
-    }
-  });
+    });
+  }
 
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(walletAddress, amount, currency);
+    try {
+      if (!token) {
+        return;
+      }
+
+      if (walletAddress && quantity && currency) {
+        if (walletAddress === phoneNumber) {
+          console.log("can't send request to yourself");
+        } else {
+          dispatch(sendCoinAPI(token, currency, quantity, walletAddress));
+        }
+      }
+    } catch (err: any) {
+      console.log(err.statusCode);
+      console.log(err.message);
+    }
   };
 
   return (
@@ -56,7 +74,7 @@ const Transfer = () => {
             <h3>
               <em>Transfer</em> Crypto
             </h3>
-            <p>Send amount from your wallet</p>
+            <p>Send Coin Quantity from your wallet</p>
           </div>
 
           <form onSubmit={formSubmitHandler}>
@@ -87,8 +105,8 @@ const Transfer = () => {
                 <IonLabel position="floating">Send Amount (PKR)</IonLabel>
                 <IonInput
                   type="number"
-                  value={amount}
-                  onIonChange={(e) => setAmount(e.detail.value!)}></IonInput>
+                  value={quantity}
+                  onIonChange={(e) => setQuantity(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 

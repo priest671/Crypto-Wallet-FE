@@ -10,6 +10,7 @@ interface coinProps {
 
 const Coin = (props: coinProps) => {
   const [price, setPrice] = useState(0);
+  const [displayQuantity, setDisplayQuantity] = useState<any>();
 
   useEffect(() => {
     let quantity = 1;
@@ -24,10 +25,14 @@ const Coin = (props: coinProps) => {
         let price = res.data.data.amount * quantity;
         price = Number(price.toFixed(2));
         setPrice(price);
+
+        setDisplayQuantity(Number(quantity).toFixed(6));
       });
     } else if (props.name && props.acronym === "PKR") {
       setPrice(quantity);
+      setDisplayQuantity(Number(quantity));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -41,7 +46,7 @@ const Coin = (props: coinProps) => {
       </div>
 
       <div className={`${styles["item"]} ${styles["quantity"]}`}>
-        <p>{props.quantity}</p>
+        <p>{props.quantity && displayQuantity}</p>
       </div>
 
       <div className={`${styles["item"]} ${styles["price"]}`}>

@@ -1,7 +1,7 @@
 // Ionic Imports
 
 // React Imports
-import React from "react";
+import React, { useEffect } from "react";
 
 // Redux Imports
 
@@ -11,31 +11,53 @@ import React from "react";
 import styles from "./Transaction.module.css";
 import { MdCallReceived, MdOutlineCallMade } from "react-icons/md";
 
-interface TransactionsProps {
-  id: number;
-  coin: string;
-  quantity: string;
-  date: string;
-  type: string;
-  terminal: string;
-}
+const Transaction = (props: any) => {
+  // let transactionType;
+  const [displayTerminal, setDisplayTerminal] = React.useState<string>();
+  const [transactionType, setTransactionType] = React.useState<any>();
 
-const Transaction = (props: TransactionsProps) => {
-  let transactionType;
+  // key={transaction._id}
+  // owner={transaction.owner}
+  // coin={transaction.coin}
+  // quantity={transaction.quantity}
+  // type={transaction.type}
+  // terminal={transaction.terminal}
+  // phoneNumber={phoneNumber}
 
-  if (props.type === "send") {
-    transactionType = (
-      <div className={`${styles["type-icon"]} ${styles["send"]}`}>
-        <MdOutlineCallMade />
-      </div>
-    );
-  } else {
-    transactionType = (
-      <div className={`${styles["type-icon"]} ${styles["receive"]}`}>
-        <MdCallReceived />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (props.terminal === "Market") {
+      setDisplayTerminal("Market");
+      if (props.type === "send") {
+        setTransactionType(
+          <div className={`${styles["type-icon"]} ${styles["send"]}`}>
+            <MdOutlineCallMade />
+          </div>
+        );
+      } else {
+        setTransactionType(
+          <div className={`${styles["type-icon"]} ${styles["receive"]}`}>
+            <MdCallReceived />
+          </div>
+        );
+      }
+    } else {
+      if (props.terminal === props.phoneNumber) {
+        setDisplayTerminal(props.owner.phoneNumber);
+        setTransactionType(
+          <div className={`${styles["type-icon"]} ${styles["receive"]}`}>
+            <MdCallReceived />
+          </div>
+        );
+      } else {
+        setDisplayTerminal(props.terminal);
+        setTransactionType(
+          <div className={`${styles["type-icon"]} ${styles["send"]}`}>
+            <MdOutlineCallMade />
+          </div>
+        );
+      }
+    }
+  }, []);
 
   return (
     <div className={styles["transaction-wrapper"]}>
@@ -43,9 +65,9 @@ const Transaction = (props: TransactionsProps) => {
 
       <div className={`${styles["item"]} ${styles["coin"]}`}>
         <div className={styles["coin-picture"]}>
-          <img src={`images/${props.coin}.png`} alt="IMG" />
+          <img src={`images/${props.coin.acronym}.png`} alt="IMG" />
         </div>
-        <p className={styles["coin-name"]}>{props.coin}</p>
+        <p className={styles["coin-name"]}>{props.coin.name}</p>
       </div>
 
       <div className={`${styles["item"]} ${styles["quantity"]}`}>
@@ -53,7 +75,7 @@ const Transaction = (props: TransactionsProps) => {
       </div>
 
       <div className={`${styles["item"]} ${styles["terminal"]}`}>
-        <p>{props.terminal}</p>
+        <p>{displayTerminal}</p>
       </div>
     </div>
   );

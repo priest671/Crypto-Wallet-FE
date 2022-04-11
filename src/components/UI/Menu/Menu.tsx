@@ -26,7 +26,7 @@ const Menu: React.FC = () => {
   const navigate = useNavigate();
 
   let name = useAppSelector((state) => state.user.name);
-  let balance = useAppSelector((state) => state.wallet.balance);
+  let walletBalance = useAppSelector((state) => state.wallet.balance);
   let role = useAppSelector((state) => state.user.role);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Menu: React.FC = () => {
               <div>
                 <Fragment>
                   {" "}
-                  <p>PKR: {balance}</p> <SiBitcoincash />
+                  <p>PKR: {walletBalance?.toFixed(2)}</p> <SiBitcoincash />
                 </Fragment>
               </div>
             </div>

@@ -13,7 +13,7 @@ const PieChart = (data: any) => {
       cornerRadius={5}
       colors={colors}
       activeOuterRadiusOffset={8}
-      arcLinkLabelsSkipAngle={5}
+      arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor="white"
       arcLinkLabelsThickness={1}
       arcLinkLabelsColor="white"

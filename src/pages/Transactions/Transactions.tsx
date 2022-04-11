@@ -2,72 +2,50 @@
 import { IonContent, IonPage } from "@ionic/react";
 
 // React Imports
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // Redux Imports
 
 // Component Imports
 import Header from "../../components/Header/Header";
+import { useAppSelector } from "../../store/hooks";
+import { getTransactionsAPI } from "../../store/User/UserActions";
 import Transaction from "./Transaction/Transaction";
 
 // Styles / Icons Imports
 import styles from "./Transactions.module.css";
 
-let allTransactions = [
-  {
-    id: 1,
-    coin: "BTC",
-    quantity: "0.0001",
-    date: "2020-01-01",
-    type: "send",
-    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
-  },
-  {
-    id: 2,
-    coin: "ETH",
-    quantity: "0.01",
-    date: "2020-01-01",
-    type: "recieve",
-    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
-  },
-
-  {
-    id: 3,
-    coin: "SOL",
-    quantity: "30.00",
-    date: "2020-01-01",
-    type: "send",
-    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
-  },
-
-  {
-    id: 4,
-    coin: "ATOM",
-    quantity: "50.00",
-    date: "2020-01-01",
-    type: "recieve",
-    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
-  },
-
-  {
-    id: 5,
-    coin: "USDT",
-    quantity: "100.00",
-    date: "2020-01-01",
-    type: "send",
-    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
-  },
-  {
-    id: 6,
-    coin: "LTC",
-    quantity: "1.00",
-    date: "2020-01-01",
-    type: "recieve",
-    terminal: "$2b$12$MdQ4dTDvBQDy3fckmo///ukt7GACpdoM9EleHRBJdOJ6A9MnNshBe",
-  },
-];
-
 const Transactions = () => {
+  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const transactions = useAppSelector((state) => state.user.transactions);
+  const phoneNumber = useAppSelector((state) => state.user.phoneNumber);
+
+  let allTransactions;
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+    dispatch(getTransactionsAPI(token));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (transactions) {
+    allTransactions = transactions.map((transaction: any) => (
+      <Transaction
+        key={transaction._id}
+        owner={transaction.owner}
+        coin={transaction.coin}
+        quantity={transaction.quantity}
+        type={transaction.type}
+        terminal={transaction.terminal}
+        phoneNumber={phoneNumber}
+      />
+    ));
+  }
+
   return (
     <IonPage id="main">
       <IonContent>
@@ -98,17 +76,7 @@ const Transactions = () => {
               </div>
             </div>
 
-            {allTransactions.map((transaction) => (
-              <Transaction
-                key={transaction.id}
-                id={transaction.id}
-                coin={transaction.coin}
-                quantity={transaction.quantity}
-                date={transaction.date}
-                type={transaction.type}
-                terminal={transaction.terminal}
-              />
-            ))}
+            {allTransactions}
           </div>
         </div>
       </IonContent>

@@ -42,3 +42,23 @@ export const getAllUsersAPI = (token: string, role: string) => {
     }
   };
 };
+
+export const getTransactionsAPI = (token: string) => {
+  return async (dispatch: any) => {
+    const sendRequest = async () => {
+      return await axios.get(`${backendLink}/transaction/`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+    };
+
+    try {
+      const response = await sendRequest();
+      dispatch(userActions.setTransactions(response.data.transactions));
+    } catch (err: any) {
+      let error = decodeError(err);
+      throw error;
+    }
+  };
+};

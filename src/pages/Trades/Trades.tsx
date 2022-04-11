@@ -33,6 +33,7 @@ const Trades = () => {
   const [balance, setBalance] = React.useState<number>();
 
   const coinPrices = useAppSelector((state) => state.wallet.prices);
+
   const dispatch = useAppDispatch();
 
   let buyOptions;
@@ -60,9 +61,6 @@ const Trades = () => {
 
   if (coinPrices) {
     pkr = coinPrices.find((coin: any) => coin.id === "PKR");
-  }
-
-  if (coinPrices) {
     sellOptions = coinPrices.map((coin: any) => {
       return (
         <IonSelectOption key={coin.id} value={coin.id}>
@@ -93,7 +91,11 @@ const Trades = () => {
         if (buyAmount) {
           dispatch(buyCoinAPI(token, buyCurrency, buyAmount));
           setBalance((prevState: any) => {
-            return prevState - parseFloat(buyAmount);
+            if (prevState - parseFloat(buyAmount) >= 0) {
+              return prevState - parseFloat(buyAmount);
+            } else {
+              return prevState;
+            }
           });
         }
       }
