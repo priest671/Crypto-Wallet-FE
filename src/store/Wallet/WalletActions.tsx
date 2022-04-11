@@ -66,16 +66,78 @@ export const updateBalance = (coins: any) => {
   };
 };
 
+export const buyCoinAPI = (token: string, buyCurrency: string, buyAmount: string) => {
+  return async (dispatch: any) => {
+    const sendRequest = async (quantity: string) => {
+      return await axios.put(
+        `${backendLink}/wallet/buy`,
+        {
+          acronym: buyCurrency,
+          quantity,
+          price: buyAmount,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    };
+
+    try {
+      let price = await getPrice(buyCurrency);
+      let quantity = parseFloat(buyAmount) / price;
+      quantity = parseFloat(quantity.toFixed(6));
+
+      let response = await sendRequest(quantity.toString());
+
+      dispatch(walletActions.setCoins(response.data.wallet.coins));
+
+      console.log(response);
+    } catch (err: any) {
+      let error = decodeError(err);
+      throw error;
+    }
+  };
+};
+
+export const sellCoinAPI = (token: string, sellCurrency: string, sellAmount: string) => {
+  return async (dispatch: any) => {
+    const sendRequest = async (quantity: string) => {
+      return await axios.put(
+        `${backendLink}/wallet/sell`,
+        {
+          acronym: sellCurrency,
+          quantity,
+          price: sellAmount,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    };
+
+    try {
+      let price = await getPrice(sellCurrency);
+      let quantity = parseFloat(sellAmount) / price;
+      quantity = parseFloat(quantity.toFixed(6));
+
+      let response = await sendRequest(quantity.toString());
+
+      dispatch(walletActions.setCoins(response.data.wallet.coins));
+
+      console.log(response);
+    } catch (err: any) {
+      let error = decodeError(err);
+      throw error;
+    }
+  };
+};
+
 export const resetWallet = () => {
   return async (dispatch: any) => {
     dispatch(walletActions.resetWallet());
   };
-};
-
-export const buyCoinAPI = (token: string, coin: string, quantity: number) => {
-  console.log(coin);
-};
-
-export const sellCoinAPI = (token: string, coin: string, quantity: number) => {
-  console.log(coin);
 };

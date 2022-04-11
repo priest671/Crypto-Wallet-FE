@@ -23,6 +23,15 @@
   margin: 20px 0 10px 0;
 }
 
+.balance {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.balance p em {
+  color: var(--primary);
+}
+
 .item {
   margin: 10px 0;
   width: 100%;

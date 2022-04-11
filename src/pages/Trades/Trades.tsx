@@ -30,12 +30,15 @@ const Trades = () => {
   const [sellCurrency, setSellCurrency] = React.useState<string>();
   const [sellAmount, setSellAmount] = React.useState<string>();
   const [allCoins, setAllCoins] = React.useState<any>();
+  const [balance, setBalance] = React.useState<number>();
 
-  const token = localStorage.getItem("token");
-  const userCoins = useAppSelector((state) => state.wallet.coins);
+  const coinPrices = useAppSelector((state) => state.wallet.prices);
   const dispatch = useAppDispatch();
+
   let buyOptions;
   let sellOptions;
+  let pkr: any;
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (!token) {
@@ -47,6 +50,7 @@ const Trades = () => {
       response.then((res: any) => {
         setAllCoins(res);
       });
+      setBalance(pkr?.value);
     } catch (err: any) {
       console.log(err.statusCode);
       console.log(err.message);
@@ -54,11 +58,15 @@ const Trades = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (userCoins) {
-    sellOptions = userCoins.map((coin: any) => {
+  if (coinPrices) {
+    pkr = coinPrices.find((coin: any) => coin.id === "PKR");
+  }
+
+  if (coinPrices) {
+    sellOptions = coinPrices.map((coin: any) => {
       return (
-        <IonSelectOption key={coin.coin._id} value={coin.coin.acronym}>
-          {coin.coin.name}: {coin.quantity}
+        <IonSelectOption key={coin.id} value={coin.id}>
+          {coin.label}: {coin.value}
         </IonSelectOption>
       );
     });
@@ -74,21 +82,47 @@ const Trades = () => {
     });
   }
 
-  const buyFormSubmitHandler = (e: any) => {
+  const buyFormSubmitHandler = async (e: any) => {
     e.preventDefault();
+    try {
+      if (!token) {
+        return;
+      }
 
-    if (!token) {
-      return;
+      if (buyCurrency) {
+        if (buyAmount) {
+          dispatch(buyCoinAPI(token, buyCurrency, buyAmount));
+          setBalance((prevState: any) => {
+            return prevState - parseFloat(buyAmount);
+          });
+        }
+      }
+    } catch (err: any) {
+      console.log(err.statusCode);
+      console.log(err.message);
     }
-
-    console.log(buyCurrency, buyAmount);
-
-    dispatch(buyCoinAPI(token, buyCurrency, buyAmount));
   };
 
   const sellFormSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(sellCurrency, sellAmount);
+    try {
+      if (!token) {
+        return;
+      }
+
+      if (sellCurrency) {
+        if (sellAmount) {
+          dispatch(sellCoinAPI(token, sellCurrency, sellAmount));
+          setBalance((prevState: any) => {
+            return prevState + parseFloat(sellAmount);
+          });
+        }
+      }
+      // pkr =
+    } catch (err: any) {
+      console.log(err.statusCode);
+      console.log(err.message);
+    }
   };
 
   return (
@@ -101,6 +135,12 @@ const Trades = () => {
               <em>Buy</em> Crypto
             </h3>
             <p>At the most reasonable price</p>
+          </div>
+
+          <div className={styles["balance"]}>
+            <p>
+              Current Balancec: RS <em>{balance}</em>
+            </p>
           </div>
 
           <form onSubmit={buyFormSubmitHandler}>
@@ -156,7 +196,7 @@ const Trades = () => {
 
             <div className={styles["item"]}>
               <IonItem>
-                <IonLabel position="floating">Sell Amount (QTY)</IonLabel>
+                <IonLabel position="floating">Sell Amount (PKR)</IonLabel>
                 <IonInput
                   type="number"
                   value={sellAmount}
