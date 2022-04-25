@@ -84,12 +84,13 @@ const Register = () => {
       <IonContent>
         <Header title="Register" />
         <div className={styles["container"]}>
-          <div className={styles["header"]}>
-            <h3>
-              <em>Register</em> Account
-            </h3>
-            <p>Get your own wallet now</p>
+          <div className={styles["image"]}>
+            <img src={`images/Wallet3.png`} alt="IMG" />
           </div>
+          <h3>Create Account</h3>
+          <p>
+            <em>Register</em> now to start using Pak Wallet
+          </p>
 
           <form onSubmit={formSubmitHandler}>
             <div className={styles["item"]}>

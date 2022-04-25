@@ -66,12 +66,13 @@ const Login = () => {
       <IonContent>
         <Header title="Login" />
         <div className={styles["container"]}>
-          <div className={styles["header"]}>
-            <h3>
-              <em>Login</em> Your Account
-            </h3>
-            <p>To start using Pak Wallet</p>
+          <div className={styles["image"]}>
+            <img src={`images/Wallet3.png`} alt="IMG" />
           </div>
+          <h3>Welcome back!</h3>
+          <p>
+            <em>Login</em> to start using Pak Wallet
+          </p>
 
           <form onSubmit={formSubmitHandler}>
             <div className={styles["item"]}>
