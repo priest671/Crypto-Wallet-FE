@@ -1,13 +1,9 @@
 // Ionic Imports
-import { IonContent, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
+import { IonContent, IonInput, IonItem, IonLabel, IonPage, useIonAlert } from "@ionic/react";
 
 // React Imports
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// Redux Imports
-import { registerAPI } from "../../store/Authentication/AuthenticationActions";
-import { useAppDispatch } from "../../store/hooks";
 
 // Component Imports
 import Header from "../../components/Header/Header";
@@ -24,31 +20,62 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const navigate = useNavigate();
+  const [present] = useIonAlert();
 
-  const dispatch = useAppDispatch();
+  const setPresent = (errorHeader: any, errorBody: any, buttons: any) => {
+    present({
+      cssClass: "my-css",
+      header: errorHeader,
+      message: errorBody,
+      buttons: [...buttons],
+      // onDidDismiss: (e) => console.log("did dismiss"),
+    });
+  };
 
   const formSubmitHandler = async (e: any) => {
     e.preventDefault();
 
-    e.preventDefault();
+    if (password === "" || confirmPassword === "") {
+      setPresent("Error", "Password can not be empty", ["OK"]);
+      return;
+    }
 
-    try {
-      let response = await dispatch(
-        registerAPI({
-          name,
-          phoneNumber,
-          email,
-          password,
-          confirmPassword,
-          role: "admin",
-        })
-      );
-      if (response) {
-        navigate("/login");
+    if (password !== confirmPassword) {
+      setPresent("Error", "Passwords do not match", ["OK"]);
+      return;
+    }
+
+    let tempPhoneNumber = phoneNumber;
+    //Removing Spaces and Whitespaces from Number
+    tempPhoneNumber = tempPhoneNumber.trim();
+    tempPhoneNumber = tempPhoneNumber.replace(/\s/g, "");
+
+    //Removing + from the phone number
+    if (tempPhoneNumber.charAt(0) === "+") {
+      tempPhoneNumber = tempPhoneNumber.substring(1, tempPhoneNumber.length);
+    }
+
+    //Phone Number Validation and Adding Country Code
+    if (tempPhoneNumber.length < 11 || tempPhoneNumber.length > 12) {
+      setPresent("Error", "Invalid Phone Number", ["OK"]);
+      return;
+    }
+    //Number length can only be 11 only if it starts with 0
+    else if (tempPhoneNumber.length === 11 && tempPhoneNumber.charAt(0) !== "0") {
+      setPresent("Error", "Invalid Phone Number", ["OK"]);
+      return;
+    } else {
+      if (tempPhoneNumber[0] === "0") {
+        //Removing 0 from the number
+        tempPhoneNumber = tempPhoneNumber.substring(1, tempPhoneNumber.length);
+        tempPhoneNumber = "+92" + tempPhoneNumber;
+      } else {
+        tempPhoneNumber = "+" + tempPhoneNumber;
       }
-    } catch (err: any) {
-      console.log(err.statusCode);
-      console.log(err.message);
+
+      navigate("/otp", {
+        state: { phoneNumber: tempPhoneNumber, name, email, password, confirmPassword },
+      });
     }
   };
 

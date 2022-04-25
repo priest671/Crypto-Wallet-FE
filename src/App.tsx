@@ -44,10 +44,15 @@ import UserSetting from "./pages/UserSetting/UserSetting";
 import Trades from "./pages/Trades/Trades";
 import Transfer from "./pages/Transfer/Transfer";
 import Admin from "./pages/Admin/Admin";
+import OTP from "./pages/OTP/OTP";
+
+// Firebase Import
+import firebase from "./firebaseConfig";
 
 setupIonicReact();
 
 const App: React.FC = () => {
+  let _firebase = firebase;
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector((state) => state.authentication.isAuth);
 
@@ -106,6 +111,7 @@ const App: React.FC = () => {
           <Route path="/usersetting" element={<UserSetting />} />
           <Route path="/transfer" element={<Transfer />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/otp" element={<OTP />} />
         </Routes>
       </Router>
     </IonApp>
