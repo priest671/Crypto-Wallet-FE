@@ -14,6 +14,12 @@ const Coin = (props: coinProps) => {
   const [displayQuantity, setDisplayQuantity] = useState<any>();
   const navigate = useNavigate();
 
+  const coinClickHandler = () => {
+    if (props.acronym !== "PKR") {
+      navigate(`/coin/${props.acronym}`, { state: { acronym: props.acronym } });
+    }
+  };
+
   useEffect(() => {
     let quantity = 1;
 
@@ -38,11 +44,7 @@ const Coin = (props: coinProps) => {
   }, []);
 
   return (
-    <div
-      className={styles["wrapper"]}
-      onClick={() =>
-        navigate(`/coin/${props.acronym}`, { state: { acronym: props.acronym } })
-      }>
+    <div className={styles["wrapper"]} onClick={coinClickHandler}>
       <div className={`${styles["item"]} ${styles["coin"]}`}>
         <div className={styles["coin-picture"]}>
           <img src={`images/${props.acronym}.png`} alt="IMG" />
