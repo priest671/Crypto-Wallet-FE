@@ -46,6 +46,7 @@ import Transfer from "./pages/Transfer/Transfer";
 import Admin from "./pages/Admin/Admin";
 import OTP from "./pages/OTP/OTP";
 
+import CoinData from "./pages/CoinData/CoinData";
 // Firebase Import
 import firebase from "./firebaseConfig";
 
@@ -112,6 +113,7 @@ const App: React.FC = () => {
           <Route path="/transfer" element={<Transfer />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/otp" element={<OTP />} />
+          <Route path="coin/:coin" element={<CoinData />} />
         </Routes>
       </Router>
     </IonApp>

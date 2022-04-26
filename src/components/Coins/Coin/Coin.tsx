@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Coin.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface coinProps {
   name: string | boolean;
@@ -11,6 +12,7 @@ interface coinProps {
 const Coin = (props: coinProps) => {
   const [price, setPrice] = useState(0);
   const [displayQuantity, setDisplayQuantity] = useState<any>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let quantity = 1;
@@ -36,7 +38,11 @@ const Coin = (props: coinProps) => {
   }, []);
 
   return (
-    <div className={styles["wrapper"]}>
+    <div
+      className={styles["wrapper"]}
+      onClick={() =>
+        navigate(`/coin/${props.acronym}`, { state: { acronym: props.acronym } })
+      }>
       <div className={`${styles["item"]} ${styles["coin"]}`}>
         <div className={styles["coin-picture"]}>
           <img src={`images/${props.acronym}.png`} alt="IMG" />
