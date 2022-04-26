@@ -71,9 +71,9 @@ const OTP = () => {
     // e.preventDefault();
     configureCaptcha();
 
-    // Testing Console Logs (remove if wished)
-    console.log("onRegister");
-    console.log("Phone Number: ", phoneNumber);
+    // Testing Console Logs (remove if wish)
+    // console.log("onRegister");
+    // console.log("Phone Number: ", phoneNumber);
 
     const appVerifier = recaptchaVerifier;
     const auth = getAuth();
@@ -84,8 +84,8 @@ const OTP = () => {
           setConfirmationResult(_confirmationResult);
         })
         .catch((error) => {
-          // Error; SMS not sent
-          console.log("SMS not sent", error);
+          // Error
+          console.log(error);
         });
     }
   };
