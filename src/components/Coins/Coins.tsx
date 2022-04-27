@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Coin from "./Coin/Coin";
 import styles from "./Coins.module.css";
-import axios from "axios";
 import { useAppSelector } from "../../store/hooks";
 
 interface coinsProps {
