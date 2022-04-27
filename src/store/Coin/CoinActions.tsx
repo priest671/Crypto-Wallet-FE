@@ -2,6 +2,7 @@ import axios from "axios";
 import { backendLink } from "../../helper/BackendLink";
 import { decodeError } from "../../helper/HelperFunctions";
 import { walletActions } from "../Wallet/Wallet";
+import { coinActions } from "./Coin";
 
 export const createCoinAPI = (token: string, coinName: string, coinAcroynm: string) => {
   return async (dispatch: any) => {
@@ -90,6 +91,27 @@ export const getCoinsAPI = (token: string) => {
     } catch (err: any) {
       let error = decodeError(err);
       throw error;
+    }
+  };
+};
+
+export const updateCoinHistory = () => {
+  return async (dispatch: any) => {
+    const sendRequest = async () => {
+      return await axios.get("https://coinranking1.p.rapidapi.com/coins", {
+        headers: {
+          "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
+          "X-RapidAPI-Key": "50c5c9cb68mshd05377fc34887f4p18a042jsn99040560abb1",
+        },
+      });
+    };
+
+    try {
+      const response = await sendRequest();
+      let coins = response.data.data.coins;
+      dispatch(coinActions.setCoinHistory(coins));
+    } catch (err: any) {
+      throw err;
     }
   };
 };

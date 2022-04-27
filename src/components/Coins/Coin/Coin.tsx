@@ -2,21 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Coin.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { coinActions } from "../../../store/Coin/Coin";
 
 interface coinProps {
   name: string | boolean;
   acronym: string;
   quantity?: number;
+  uuid?: string;
 }
 
 const Coin = (props: coinProps) => {
   const [price, setPrice] = useState(0);
   const [displayQuantity, setDisplayQuantity] = useState<any>();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const coinClickHandler = () => {
-    if (props.acronym !== "PKR") {
-      navigate(`/coin/${props.acronym}`, { state: { acronym: props.acronym } });
+    if (props.acronym !== "PKR" && props.uuid) {
+      navigate(`/coin/${props.acronym}`, {
+        state: { acronym: props.acronym, uuid: props.uuid },
+      });
     }
   };
 
@@ -30,10 +36,15 @@ const Coin = (props: coinProps) => {
     if (props.name && props.acronym !== "PKR") {
       const url = `https://api.coinbase.com/v2/prices/${props.acronym}-PKR/buy`;
       axios.get(url).then((res) => {
-        let price = res.data.data.amount * quantity;
+        let price = res.data.data.amount;
+
+        if (props.acronym === "USDT") {
+          dispatch(coinActions.setExchangeRate(price));
+        }
+
+        price = price * quantity;
         price = Number(price.toFixed(2));
         setPrice(price);
-
         setDisplayQuantity(Number(quantity).toFixed(6));
       });
     } else if (props.name && props.acronym === "PKR") {

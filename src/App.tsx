@@ -49,6 +49,7 @@ import OTP from "./pages/OTP/OTP";
 import CoinData from "./pages/CoinData/CoinData";
 // Firebase Import
 import firebase from "./firebaseConfig";
+import { updateCoinHistory } from "./store/Coin/CoinActions";
 
 setupIonicReact();
 
@@ -77,6 +78,7 @@ const App: React.FC = () => {
 
     dispatch(getUserAPI(token));
     dispatch(getWalletAPI(token));
+    dispatch(updateCoinHistory());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

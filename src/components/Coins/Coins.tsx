@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Coin from "./Coin/Coin";
 import styles from "./Coins.module.css";
+import axios from "axios";
+import { useAppSelector } from "../../store/hooks";
 
 interface coinsProps {
   allCoins: any;
@@ -9,9 +11,17 @@ interface coinsProps {
 const Coins = (props: coinsProps) => {
   let coins;
   let hasQuantity = false;
+  let coinUUID;
+  let coinHistory = useAppSelector((state) => state.coin.coinHistory);
 
   if (props.allCoins) {
     coins = props.allCoins.map((coin: any, index: number) => {
+      if (coin.coin) {
+        coinUUID = coinHistory.find((coinData: any) => coinData.name === coin.coin.name);
+      } else {
+        coinUUID = coinHistory.find((coinData: any) => coinData.name === coin.name);
+      }
+
       if (coin.quantity) {
         hasQuantity = true;
         return (
@@ -20,10 +30,18 @@ const Coins = (props: coinsProps) => {
             name={coin.coin.name}
             acronym={coin.coin.acronym}
             quantity={coin.quantity}
+            uuid={coinUUID && coinUUID.uuid}
           />
         );
       } else {
-        return <Coin key={index} name={coin.name} acronym={coin.acronym} />;
+        return (
+          <Coin
+            key={index}
+            name={coin.name}
+            acronym={coin.acronym}
+            uuid={coinUUID && coinUUID.uuid}
+          />
+        );
       }
     });
   }
