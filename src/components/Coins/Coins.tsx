@@ -29,17 +29,12 @@ const Coins = (props: coinsProps) => {
             name={coin.coin.name}
             acronym={coin.coin.acronym}
             quantity={coin.quantity}
-            uuid={coinUUID && coinUUID.uuid}
+            coinInfo={coinUUID}
           />
         );
       } else {
         return (
-          <Coin
-            key={index}
-            name={coin.name}
-            acronym={coin.acronym}
-            uuid={coinUUID && coinUUID.uuid}
-          />
+          <Coin key={index} name={coin.name} acronym={coin.acronym} coinInfo={coinUUID} />
         );
       }
     });

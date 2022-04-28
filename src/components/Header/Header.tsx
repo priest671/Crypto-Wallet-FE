@@ -13,23 +13,34 @@ interface Props {
   title: string;
 }
 
+const backOptions = [
+  "Bitcoin",
+  "Ethereum",
+  "Dogecoin",
+  "Cardano",
+  "Solana",
+  "Litecoin",
+  "Login",
+  "Register",
+];
+
 const Header: React.FC<Props> = (props) => {
   let backButton;
-  if (props.title !== "Login" && props.title !== "Register") {
-    backButton = (
-      <IonButtons>
-        <IonMenuToggle hidden={false} autoHide={false}>
-          <IonMenuButton hidden={false} autoHide={false} />
-        </IonMenuToggle>
-      </IonButtons>
-    );
-  } else {
+  if (backOptions.includes(props.title)) {
     backButton = (
       <div className={styles["backButton"]}>
         <Link to="/">
           <IoMdArrowRoundBack />
         </Link>
       </div>
+    );
+  } else {
+    backButton = (
+      <IonButtons>
+        <IonMenuToggle hidden={false} autoHide={false}>
+          <IonMenuButton hidden={false} autoHide={false} />
+        </IonMenuToggle>
+      </IonButtons>
     );
   }
 

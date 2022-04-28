@@ -9,7 +9,7 @@ interface coinProps {
   name: string | boolean;
   acronym: string;
   quantity?: number;
-  uuid?: string;
+  coinInfo?: any;
 }
 
 const Coin = (props: coinProps) => {
@@ -19,9 +19,9 @@ const Coin = (props: coinProps) => {
   const dispatch = useDispatch();
 
   const coinClickHandler = () => {
-    if (props.acronym !== "PKR" && props.uuid) {
+    if (props.acronym !== "PKR" && props.coinInfo) {
       navigate(`/coin/${props.acronym}`, {
-        state: { acronym: props.acronym, uuid: props.uuid },
+        state: { coinInfo: props.coinInfo },
       });
     }
   };
