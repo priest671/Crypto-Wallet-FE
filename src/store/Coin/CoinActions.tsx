@@ -109,8 +109,32 @@ export const updateCoinHistory = () => {
     try {
       const response = await sendRequest();
       let coins = response.data.data.coins;
+      console.log(coins);
       dispatch(coinActions.setCoinHistory(coins));
     } catch (err: any) {
+      console.log(err);
+      throw err;
+    }
+  };
+};
+
+export const getCoinPriceHistory = (uuid: string, timePeriod: string) => {
+  return async (dispatch: any) => {
+    const sendRequest = async (uuid: string, timePeriod: string) => {
+      return await axios.get(`https://coinranking1.p.rapidapi.com/coin/${uuid}/history`, {
+        params: { referenceCurrencyUuid: "yhjMzLPhuIDl", timePeriod },
+        headers: {
+          "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
+          "X-RapidAPI-Key": "50c5c9cb68mshd05377fc34887f4p18a042jsn99040560abb1",
+        },
+      });
+    };
+
+    try {
+      const response = await sendRequest(uuid, timePeriod);
+      return response.data.data;
+    } catch (err: any) {
+      console.log(err);
       throw err;
     }
   };

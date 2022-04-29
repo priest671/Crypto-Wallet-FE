@@ -18,6 +18,14 @@ const Coin = (props: coinProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  let coinImg;
+
+  if (props.coinInfo) {
+    coinImg = <img src={props.coinInfo.iconUrl} alt={props.coinInfo.name} />;
+  } else {
+    coinImg = <img src={`images/${props.acronym}.png`} alt="IMG" />;
+  }
+
   const coinClickHandler = () => {
     if (props.acronym !== "PKR" && props.coinInfo) {
       navigate(`/coin/${props.acronym}`, {
@@ -57,9 +65,7 @@ const Coin = (props: coinProps) => {
   return (
     <div className={styles["wrapper"]} onClick={coinClickHandler}>
       <div className={`${styles["item"]} ${styles["coin"]}`}>
-        <div className={styles["coin-picture"]}>
-          <img src={`images/${props.acronym}.png`} alt="IMG" />
-        </div>
+        <div className={styles["coin-picture"]}>{coinImg}</div>
 
         <p className={styles["coin-name"]}>{props.name}</p>
       </div>

@@ -1,9 +1,12 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { getCoinColors } from "../../helper/HelperFunctions";
+import { useAppSelector } from "../../store/hooks";
 
 const PieChart = (data: any) => {
-  let colors = getCoinColors(data.data);
+  //  let coinPrices = useAppSelector((state) => state.wallet.prices);
+  let coinHistory = useAppSelector((state) => state.coin.coinHistory);
+  let colors = getCoinColors(data.data, coinHistory);
   return (
     <ResponsivePie
       data={data.data}

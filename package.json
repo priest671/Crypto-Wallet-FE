@@ -27,6 +27,7 @@
     "firebase": "^9.6.11",
     "ionicons": "^5.4.0",
     "react": "^17.0.1",
+    "react-chartjs-2": "^4.1.0",
     "react-dom": "^17.0.1",
     "react-icons": "^4.3.1",
     "react-loader-spinner": "^6.0.0-0",
