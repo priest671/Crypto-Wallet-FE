@@ -31,7 +31,32 @@ export const getCoinColors = (walletCoins: any, coinHistory: any) => {
     } else if (item.id === "USDT") {
       colors.push("#279978");
     } else {
-      colors.push(coinHistory.find((coin: any) => coin.symbol === item.id).color);
+      let coin = coinHistory.find((coin: any) => coin.symbol === item.id);
+      if (coin) {
+        colors.push(coin.color);
+      } else {
+        if (item.id === "BTC") {
+          colors.push("#f7931b");
+        } else if (item.id === "ETH") {
+          colors.push("#3C3C3D");
+        } else if (item.id === "ETH2") {
+          colors.push("#8e1cde");
+        } else if (item.id === "DOGE") {
+          colors.push("#b1972e");
+        } else if (item.id === "ADA") {
+          colors.push("#0034ad");
+        } else if (item.id === "SOL") {
+          colors.push("#36c8c2");
+        } else if (item.id === "USDT") {
+          colors.push("#279978");
+        } else if (item.id === "LTC") {
+          colors.push("#345d9d");
+        } else if (item.id === "ATOM") {
+          colors.push("#5064fb");
+        } else {
+          colors.push("#000000");
+        }
+      }
     }
   });
 

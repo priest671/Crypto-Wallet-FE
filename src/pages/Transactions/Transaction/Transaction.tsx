@@ -12,17 +12,10 @@ import styles from "./Transaction.module.css";
 import { MdCallReceived, MdOutlineCallMade } from "react-icons/md";
 
 const Transaction = (props: any) => {
-  // let transactionType;
   const [displayTerminal, setDisplayTerminal] = React.useState<string>();
   const [transactionType, setTransactionType] = React.useState<any>();
 
-  // key={transaction._id}
-  // owner={transaction.owner}
-  // coin={transaction.coin}
-  // quantity={transaction.quantity}
-  // type={transaction.type}
-  // terminal={transaction.terminal}
-  // phoneNumber={phoneNumber}
+  let coinImage;
 
   useEffect(() => {
     if (props.terminal === "Market") {
@@ -60,14 +53,18 @@ const Transaction = (props: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (props.coin.acronym) {
+    coinImage = <img src={`images/${props.coin.acronym}.png`} alt="IMG" />;
+  } else {
+    coinImage = <img src={props.coin.iconUrl} alt="IMG" />;
+  }
+
   return (
     <div className={styles["transaction-wrapper"]}>
       <div className={`${styles["item"]} ${styles["type"]}`}>{transactionType}</div>
 
       <div className={`${styles["item"]} ${styles["coin"]}`}>
-        <div className={styles["coin-picture"]}>
-          <img src={`images/${props.coin.acronym}.png`} alt="IMG" />
-        </div>
+        <div className={styles["coin-picture"]}>{coinImage}</div>
         <p className={styles["coin-name"]}>{props.coin.name}</p>
       </div>
 

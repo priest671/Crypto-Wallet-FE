@@ -15,6 +15,7 @@ import { getWalletAPI } from "../../store/Wallet/WalletActions";
 import { useAppDispatch } from "../../store/hooks";
 import { loginAPI } from "../../store/Authentication/AuthenticationActions";
 import { authActions } from "../../store/Authentication/Authentication";
+import { updateCoinHistory } from "../../store/Coin/CoinActions";
 
 // Styles / Icons Imports
 import styles from "./Login.module.css";
@@ -46,6 +47,7 @@ const Login = () => {
             })
           );
 
+          dispatch(updateCoinHistory());
           dispatch(getUserAPI(response.data.token));
           dispatch(getWalletAPI(response.data.token));
 

@@ -108,7 +108,7 @@ const Admin = () => {
 
   const coinFormSubmitHander = (e: any) => {
     e.preventDefault();
-    console.log(coinName, coinAcroynm);
+    // console.log(coinName, coinAcroynm);
 
     try {
       const token = localStorage.getItem("token");

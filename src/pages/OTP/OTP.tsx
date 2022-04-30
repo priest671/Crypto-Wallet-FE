@@ -127,6 +127,8 @@ const OTP = () => {
     confirmationResult
       .confirm(OTP)
       .then((result: any) => {
+        phoneNumber = phoneNumber.substring(3);
+        phoneNumber = "0" + phoneNumber;
         dispatch(
           registerAPI({
             name,

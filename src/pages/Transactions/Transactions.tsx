@@ -21,8 +21,10 @@ const Transactions = () => {
   const dispatch = useDispatch();
   const transactions = useAppSelector((state) => state.user.transactions);
   const phoneNumber = useAppSelector((state) => state.user.phoneNumber);
+  const coinHistory = useAppSelector((state) => state.coin.coinHistory);
 
   let allTransactions;
+  let _tempCoin;
 
   useEffect(() => {
     if (!token) {
@@ -33,17 +35,35 @@ const Transactions = () => {
   }, []);
 
   if (transactions) {
-    allTransactions = transactions.map((transaction: any) => (
-      <Transaction
-        key={transaction._id}
-        owner={transaction.owner}
-        coin={transaction.coin}
-        quantity={transaction.quantity}
-        type={transaction.type}
-        terminal={transaction.terminal}
-        phoneNumber={phoneNumber}
-      />
-    ));
+    allTransactions = transactions.map((transaction: any) => {
+      _tempCoin = coinHistory.find((coin: any) => coin.symbol === transaction.coin.acronym);
+
+      if (_tempCoin) {
+        return (
+          <Transaction
+            key={transaction._id}
+            owner={transaction.owner}
+            coin={_tempCoin}
+            quantity={transaction.quantity}
+            type={transaction.type}
+            terminal={transaction.terminal}
+            phoneNumber={phoneNumber}
+          />
+        );
+      } else {
+        return (
+          <Transaction
+            key={transaction._id}
+            owner={transaction.owner}
+            coin={transaction.coin}
+            quantity={transaction.quantity}
+            type={transaction.type}
+            terminal={transaction.terminal}
+            phoneNumber={phoneNumber}
+          />
+        );
+      }
+    });
   }
 
   return (

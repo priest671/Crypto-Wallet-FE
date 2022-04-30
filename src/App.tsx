@@ -68,6 +68,7 @@ const App: React.FC = () => {
     if (!userId) {
       return;
     }
+
     dispatch(
       authActions.login({
         isAuth: true,
@@ -76,11 +77,13 @@ const App: React.FC = () => {
       })
     );
 
+    dispatch(updateCoinHistory());
     dispatch(getUserAPI(token));
     dispatch(getWalletAPI(token));
-    dispatch(updateCoinHistory());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
 
   return (
     <IonApp>
