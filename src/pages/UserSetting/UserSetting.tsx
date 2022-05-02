@@ -14,10 +14,10 @@ import { useAppSelector } from "../../store/hooks";
 
 const UserSetting = () => {
   const [newName, setNewName] = React.useState<string>();
-  const [newPhoneNumber, setNewPhoneNumber] = React.useState<string>();
   const [newEmail, setNewEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
   const [confirmPassword, setConfirmPassword] = React.useState<string>();
+  const [profilePicture, setProfilePicture] = React.useState<File>();
 
   let name = useAppSelector((state) => state.user.name);
   let phoneNumber = useAppSelector((state) => state.user.phoneNumber);
@@ -27,9 +27,6 @@ const UserSetting = () => {
     if (name) {
       setNewName(name);
     }
-    if (phoneNumber) {
-      setNewPhoneNumber(phoneNumber);
-    }
     if (email) {
       setNewEmail(email);
     }
@@ -37,7 +34,16 @@ const UserSetting = () => {
 
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
-    console.log(newName, newPhoneNumber, newEmail, password, confirmPassword);
+    console.log(profilePicture);
+
+    if (profilePicture) {
+      if (profilePicture.type !== "image/jpeg" && profilePicture.type !== "image/png") {
+        console.log("Invalid file type");
+        return;
+      }
+    }
+
+    console.log(newName, newEmail, password, confirmPassword, profilePicture);
   };
 
   return (
@@ -60,16 +66,6 @@ const UserSetting = () => {
                   type="text"
                   value={newName}
                   onIonChange={(e) => setNewName(e.detail.value!)}></IonInput>
-              </IonItem>
-            </div>
-
-            <div className={styles["item"]}>
-              <IonItem>
-                <IonLabel position="floating">Phone Number</IonLabel>
-                <IonInput
-                  type="number"
-                  value={newPhoneNumber}
-                  onIonChange={(e) => setNewPhoneNumber(e.detail.value!)}></IonInput>
               </IonItem>
             </div>
 
@@ -101,6 +97,15 @@ const UserSetting = () => {
                   value={confirmPassword}
                   onIonChange={(e) => setConfirmPassword(e.detail.value!)}></IonInput>
               </IonItem>
+            </div>
+
+            <div className={styles["item"]}>
+              <input
+                className={styles["file-input"]}
+                type="file"
+                onChange={(e: any) => {
+                  setProfilePicture(e.target.files[0]);
+                }}></input>
             </div>
 
             <div className={styles["footer"]}>
