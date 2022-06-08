@@ -9,6 +9,10 @@
   margin: 10px;
 }
 
+.top-box h3 {
+  font-size: 24px;
+}
+
 .middle-box {
   margin: 10px;
   justify-self: center;
@@ -19,8 +23,8 @@
   color: var(--primary);
 }
 
-.top-box h3 {
-  font-size: 24px;
+.timePeriod-select {
+  margin: 10px;
 }
 
 .pie-chart {
@@ -29,6 +33,11 @@
   justify-self: center;
   align-self: center;
   color: black;
+}
+
+.chart {
+  width: 375px;
+  height: 250px;
 }
 
 .coin-list {

@@ -72,6 +72,7 @@ const CoinData = () => {
     let data = [];
 
     if (coinPriceHistory) {
+      // console.log("coinPriceHistory", coinPriceHistory);
       let _tempPrice = 0;
       let _tempTime;
 
@@ -98,6 +99,8 @@ const CoinData = () => {
         ],
       });
     }
+
+    console.log(lineChartData);
 
     setChartData(lineChartData);
   }, [coinInfo.color, coinInfo.name, coinPriceHistory, exchangeRate]);
@@ -126,7 +129,7 @@ const CoinData = () => {
               <IonLabel>Time Period</IonLabel>
               <IonSelect
                 value={timePeriod}
-                placeholder="Select Currency"
+                placeholder="Select Period"
                 onIonChange={(e: any) => setTimePeriod(e.detail.value)}>
                 <IonSelectOption value="24h">{"24 Hours"}</IonSelectOption>
                 <IonSelectOption value="7d">{"1 Week"}</IonSelectOption>

@@ -1,5 +1,12 @@
 // Ionic Imports
-import { IonContent, IonPage } from "@ionic/react";
+import {
+  IonContent,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonSelect,
+  IonSelectOption,
+} from "@ionic/react";
 
 // React Imports
 import React, { useEffect } from "react";
@@ -22,9 +29,98 @@ const Transactions = () => {
   const transactions = useAppSelector((state) => state.user.transactions);
   const phoneNumber = useAppSelector((state) => state.user.phoneNumber);
   const coinHistory = useAppSelector((state) => state.coin.coinHistory);
+  const [selectedUser, setSelectedUser] = React.useState<string>("All");
 
   let allTransactions;
   let _tempCoin;
+  let userSelectionOptions;
+  let allTerminals: any = [];
+
+  if (transactions) {
+    for (let i = 0; i < transactions.length; i++) {
+      if (!allTerminals.includes(transactions[i].terminal)) {
+        allTerminals.push(transactions[i].terminal);
+      }
+    }
+  }
+
+  if (transactions) {
+    userSelectionOptions = allTerminals.map((terminal: any) => {
+      return (
+        <IonSelectOption value={terminal} key={terminal}>
+          {terminal}
+        </IonSelectOption>
+      );
+    });
+
+    userSelectionOptions.unshift(
+      <IonSelectOption value="All" key="All">
+        All
+      </IonSelectOption>
+    );
+  }
+
+  if (transactions) {
+    allTransactions = transactions.map((transaction: any) => {
+      _tempCoin = coinHistory.find((coin: any) => coin.symbol === transaction.coin.acronym);
+
+      if (selectedUser === "All") {
+        if (_tempCoin) {
+          return (
+            <Transaction
+              key={transaction._id}
+              owner={transaction.owner}
+              coin={_tempCoin}
+              quantity={transaction.quantity}
+              type={transaction.type}
+              terminal={transaction.terminal}
+              phoneNumber={phoneNumber}
+            />
+          );
+        } else {
+          return (
+            <Transaction
+              key={transaction._id}
+              owner={transaction.owner}
+              coin={transaction.coin}
+              quantity={transaction.quantity}
+              type={transaction.type}
+              terminal={transaction.terminal}
+              phoneNumber={phoneNumber}
+            />
+          );
+        }
+      } else {
+        if (transaction.terminal === selectedUser) {
+          if (_tempCoin) {
+            return (
+              <Transaction
+                key={transaction._id}
+                owner={transaction.owner}
+                coin={_tempCoin}
+                quantity={transaction.quantity}
+                type={transaction.type}
+                terminal={transaction.terminal}
+                phoneNumber={phoneNumber}
+              />
+            );
+          } else {
+            return (
+              <Transaction
+                key={transaction._id}
+                owner={transaction.owner}
+                coin={transaction.coin}
+                quantity={transaction.quantity}
+                type={transaction.type}
+                terminal={transaction.terminal}
+                phoneNumber={phoneNumber}
+              />
+            );
+          }
+        }
+      }
+    });
+  }
 
   useEffect(() => {
     if (!token) {
@@ -33,38 +129,6 @@ const Transactions = () => {
     dispatch(getTransactionsAPI(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (transactions) {
-    allTransactions = transactions.map((transaction: any) => {
-      _tempCoin = coinHistory.find((coin: any) => coin.symbol === transaction.coin.acronym);
-
-      if (_tempCoin) {
-        return (
-          <Transaction
-            key={transaction._id}
-            owner={transaction.owner}
-            coin={_tempCoin}
-            quantity={transaction.quantity}
-            type={transaction.type}
-            terminal={transaction.terminal}
-            phoneNumber={phoneNumber}
-          />
-        );
-      } else {
-        return (
-          <Transaction
-            key={transaction._id}
-            owner={transaction.owner}
-            coin={transaction.coin}
-            quantity={transaction.quantity}
-            type={transaction.type}
-            terminal={transaction.terminal}
-            phoneNumber={phoneNumber}
-          />
-        );
-      }
-    });
-  }
 
   return (
     <IonPage id="main">
@@ -77,6 +141,20 @@ const Transactions = () => {
             </h3>
             <p>See yout transaction history</p>
           </div>
+
+          <div className={styles["select-user"]}>
+            <IonItem>
+              <IonLabel>Select User</IonLabel>
+              <IonSelect
+                value={selectedUser}
+                defaultValue="All"
+                placeholder="All"
+                onIonChange={(e: any) => setSelectedUser(e.detail.value)}>
+                {userSelectionOptions}
+              </IonSelect>
+            </IonItem>
+          </div>
+
           <div className={styles["transactions-list"]}>
             <div className={styles["grid-header"]}>
               <div className={styles["type"]}>

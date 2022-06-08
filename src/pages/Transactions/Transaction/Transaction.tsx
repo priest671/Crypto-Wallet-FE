@@ -73,7 +73,7 @@ const Transaction = (props: any) => {
       </div>
 
       <div className={`${styles["item"]} ${styles["terminal"]}`}>
-        <p>{displayTerminal}</p>
+        <p style={{ fontSize: "10px", color: "#838383" }}>{displayTerminal}</p>
       </div>
     </div>
   );
