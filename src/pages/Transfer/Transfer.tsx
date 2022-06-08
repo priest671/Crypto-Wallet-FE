@@ -37,11 +37,14 @@ const Transfer = () => {
 
   if (coinPrices) {
     options = coinPrices.map((coin: any) => {
-      return (
-        <IonSelectOption key={coin.id} value={coin.id}>
-          {coin.label}: {coin.value}
-        </IonSelectOption>
-      );
+      if (coin.id !== "PKR") {
+        return (
+          <IonSelectOption key={coin.id} value={coin.id}>
+            {coin.label}: {coin.value}
+          </IonSelectOption>
+        );
+      }
+      return null;
     });
   }
 

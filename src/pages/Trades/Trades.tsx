@@ -62,11 +62,14 @@ const Trades = () => {
   if (coinPrices) {
     pkr = coinPrices.find((coin: any) => coin.id === "PKR");
     sellOptions = coinPrices.map((coin: any) => {
-      return (
-        <IonSelectOption key={coin.id} value={coin.id}>
-          {coin.label}: {coin.value}
-        </IonSelectOption>
-      );
+      if (coin.id !== "PKR") {
+        return (
+          <IonSelectOption key={coin.id} value={coin.id}>
+            {coin.label}: {coin.value}
+          </IonSelectOption>
+        );
+      }
+      return null;
     });
   }
 
