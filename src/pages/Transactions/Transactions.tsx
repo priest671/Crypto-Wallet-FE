@@ -39,7 +39,11 @@ const Transactions = () => {
   if (transactions) {
     for (let i = 0; i < transactions.length; i++) {
       if (!allTerminals.includes(transactions[i].terminal)) {
-        allTerminals.push(transactions[i].terminal);
+        if (transactions[i].owner.phoneNumber === phoneNumber) {
+          allTerminals.push(transactions[i].terminal);
+        } else {
+          allTerminals.push(transactions[i].owner.phoneNumber);
+        }
       }
     }
   }
@@ -91,7 +95,10 @@ const Transactions = () => {
           );
         }
       } else {
-        if (transaction.terminal === selectedUser) {
+        if (
+          transaction.terminal === selectedUser ||
+          transaction.owner.phoneNumber === selectedUser
+        ) {
           if (_tempCoin) {
             return (
               <Transaction
