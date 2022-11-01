@@ -7,8 +7,8 @@ export const decodeError = (err: any) => {
   errorMessage = errorMessage.split("Error: ")[1];
   errorMessage = errorMessage.split("<br>")[0];
   let error = new Error(errorMessage);
-  error.statusCode = err.response.status;
-  error.message = errorMessage;
+  // error.statusCode? = err.response.status;
+  // error.message = errorMessage;
   return error;
 };
 
